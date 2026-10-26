@@ -150,7 +150,6 @@ function header(c, key) {
     </a>
     <nav class="nav-menu" id="nav-menu" aria-label="${c.ui.navLabel}">
       <ul>
-        ${link(r.home, c.ui.home, 'home')}
         ${link(r.auto, c.ui.nav.auto, 'auto')}
         ${link(r.commercial, c.ui.nav.commercial, 'commercial')}
         ${link(r.property, c.ui.nav.property, 'property')}
@@ -462,14 +461,22 @@ function homePage(c) {
   </div>
 </section>`;
 
+  // Aseguradoras en dos filas que se desplazan en sentidos opuestos (cada lista va
+  // duplicada para que el movimiento sea continuo; la copia se oculta a lectores de pantalla).
+  const half = Math.ceil(site.carriers.length / 2);
+  // Sin loading="lazy": el navegador no detecta los logos que entran deslizándose y quedaban vacíos.
+  const logo = (ca) => `<li class="logo-item" title="${esc(ca.name)}"><img src="/assets/img/carriers/${ca.logo}" alt="${esc(ca.name)}" decoding="async"${ca.zoom ? ` style="--zoom:${ca.zoom}"` : ''}></li>`;
   const carriers = `
-<section class="section section-alt" id="${ids.carriers}">
+<section class="section section--compact section-alt" id="${ids.carriers}">
   <div class="container">
     ${head(7, h.carriers.label)}
     <h2 class="section-heading reveal">${h.carriers.heading}</h2>
-    <ul class="logo-wall reveal">
-      ${site.carriers.map((ca) => `<li class="logo-cell" title="${esc(ca.name)}"><img src="/assets/img/carriers/${ca.logo}" alt="${esc(ca.name)}" loading="lazy" decoding="async"${ca.zoom ? ` style="--zoom:${ca.zoom}"` : ''}></li>`).join('\n      ')}
-    </ul>
+  </div>
+  <div class="marquee reveal">
+    ${[site.carriers.slice(0, half), site.carriers.slice(half)].map((row, i) => `<div class="marquee-row${i ? ' marquee-row--reverse' : ''}">
+      <ul class="marquee-track">${row.map(logo).join('')}</ul>
+      <ul class="marquee-track" aria-hidden="true">${row.map(logo).join('')}</ul>
+    </div>`).join('\n    ')}
   </div>
 </section>`;
 

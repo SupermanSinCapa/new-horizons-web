@@ -1017,30 +1017,64 @@ strong { font-weight: 600; color: var(--ink); }
 /* ============================================
    CARRIERS
    ============================================ */
-/* Muro de logos: fondo marfil para que los logos (con o sin transparencia) se vean
-   uniformes; en gris por defecto y a color al pasar el cursor. */
-.logo-wall {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  background: var(--surface);
-  border-top: 1px solid rgba(9, 26, 63, 0.12);
-  border-left: 1px solid rgba(9, 26, 63, 0.12);
+/* Aseguradoras: dos filas de logos que se deslizan en sentidos opuestos.
+   Fondo blanco para que todos los logos se vean uniformes; en gris y a color
+   al pasar el cursor (la franja se detiene). */
+.section--compact { padding: clamp(64px, 7vw, 104px) 0; }
+
+.section--compact .section-head {
+  padding-bottom: clamp(20px, 3vw, 32px);
+  margin-bottom: clamp(24px, 3vw, 36px);
 }
 
-.logo-cell {
-  aspect-ratio: 16 / 9;
+.section--compact .section-heading {
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.marquee-row { display: flex; width: max-content; }
+
+.marquee-track {
+  display: flex;
+  flex: none;
+  gap: 12px;
+  padding-right: 12px;
+  animation: marquee 70s linear infinite;
+}
+
+.marquee-row--reverse .marquee-track { animation-direction: reverse; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.logo-item {
+  flex: none;
+  width: 190px;
+  height: 92px;
   display: grid;
   place-items: center;
-  padding: 20px 28px;
-  border-right: 1px solid rgba(9, 26, 63, 0.12);
-  border-bottom: 1px solid rgba(9, 26, 63, 0.12);
+  padding: 14px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
 }
 
-.logo-cell img {
+.logo-item img {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 58px;
+  max-height: 48px;
   object-fit: contain;
   mix-blend-mode: multiply;
   filter: grayscale(1);
@@ -1049,7 +1083,7 @@ strong { font-weight: 600; color: var(--ink); }
   transition: filter 0.4s var(--ease), opacity 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
-.logo-cell:hover img { filter: none; opacity: 1; transform: scale(calc(var(--zoom, 1) * 1.05)); }
+.logo-item:hover img { filter: none; opacity: 1; transform: scale(calc(var(--zoom, 1) * 1.05)); }
 
 /* ============================================
    EQUIPO / NOSOTROS
@@ -2114,7 +2148,6 @@ img.portrait { filter: grayscale(15%); }
   .step-text { grid-column: 2; justify-self: start; }
   .list-item { grid-template-columns: 56px minmax(0, 1fr); }
   .list-text { grid-column: 2; }
-  .logo-wall { grid-template-columns: repeat(4, 1fr); }
   .about-teaser, .profile, .contact-layout, .ig-layout { grid-template-columns: 1fr; gap: 48px; }
   .ig-intro { position: static; }
   .profile-photo { position: static; max-width: 460px; }
@@ -2131,7 +2164,6 @@ img.portrait { filter: grayscale(15%); }
   .tier + .tier { padding-left: 0; border-left: none; border-top: 1px solid var(--line); }
   .tier-name { margin: 28px 0 28px; }
   .ig-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .logo-wall { grid-template-columns: repeat(3, 1fr); }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -2184,9 +2216,8 @@ img.portrait { filter: grayscale(15%); }
   .nav-cta { display: none; }
   .nav-logo-name { font-size: 1.2rem; }
   .footer-top { grid-template-columns: 1fr; }
-  .logo-wall { grid-template-columns: repeat(2, 1fr); }
-  .logo-cell { padding: 16px 20px; }
-  .logo-cell img { max-height: 44px; }
+  .logo-item { width: 150px; height: 78px; padding: 12px 18px; }
+  .logo-item img { max-height: 40px; }
   .review-grid, .field-row { grid-template-columns: 1fr; }
   .review-card { padding: 22px; }
   .contact-form .btn { align-self: stretch; }
@@ -2212,6 +2243,8 @@ img.portrait { filter: grayscale(15%); }
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-art circle, .hero-art line { animation: none; stroke-dashoffset: 0; opacity: 1; }
-  .scroll-line::after, .typing span { animation: none; }
+  .scroll-line::after, .typing span, .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .marquee-track[aria-hidden="true"] { display: none; }
   .assistant-panel, .msg { animation: none; }
 }

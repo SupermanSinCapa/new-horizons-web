@@ -185,12 +185,13 @@ strong { font-weight: 600; color: var(--ink); }
 
 .nav-menu ul {
   display: flex;
-  gap: 36px;
+  gap: clamp(20px, 2.4vw, 36px);
 }
 
 .nav-link {
   font-size: 0.8rem;
   letter-spacing: 0.06em;
+  white-space: nowrap;
   color: var(--muted);
   transition: color 0.3s var(--ease);
   position: relative;
@@ -2134,7 +2135,7 @@ img.portrait { filter: grayscale(15%); }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: flex; }
 
   .nav-menu {

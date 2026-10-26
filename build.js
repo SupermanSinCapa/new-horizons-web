@@ -150,6 +150,7 @@ function header(c, key) {
     </a>
     <nav class="nav-menu" id="nav-menu" aria-label="${c.ui.navLabel}">
       <ul>
+        ${link(r.home, c.ui.home, 'home')}
         ${link(r.auto, c.ui.nav.auto, 'auto')}
         ${link(r.commercial, c.ui.nav.commercial, 'commercial')}
         ${link(r.property, c.ui.nav.property, 'property')}

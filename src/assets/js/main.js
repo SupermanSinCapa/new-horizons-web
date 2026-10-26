@@ -20,7 +20,7 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); toggle.focus(); }
   });
-  window.matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+  window.matchMedia('(min-width: 1181px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
   // Aparición al hacer scroll, escalonada entre elementos hermanos
   const items = document.querySelectorAll('.reveal');

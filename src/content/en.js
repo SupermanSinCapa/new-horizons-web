@@ -13,7 +13,7 @@ module.exports = {
   ui: {
     skip: 'Skip to content',
     home: 'Home',
-    nav: { auto: 'Auto', commercial: 'Commercial', property: 'Home', about: 'About us', reviews: 'Reviews', contact: 'Contact' },
+    nav: { auto: 'Auto', commercial: 'Commercial', property: 'Home Insurance', about: 'About us', reviews: 'Reviews', contact: 'Contact' },
     navLabel: 'Main',
     menuOpen: 'Open menu',
     menuClose: 'Close menu',

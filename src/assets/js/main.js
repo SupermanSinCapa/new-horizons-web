@@ -43,6 +43,60 @@
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Brillo que sigue al cursor en las tarjetas (.spotlight usa --mx / --my)
+  document.addEventListener('pointermove', (e) => {
+    const el = e.target.closest && e.target.closest('.spotlight');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+  }, { passive: true });
+
+  // Cifras que suben al aparecer; conserva "+" y decimales ("+30", "4.9", "30+").
+  const counters = [...document.querySelectorAll('[data-count]')]
+    .map((el) => ({ el, m: el.dataset.count.match(/^(\D*)([\d.]+)(\D*)$/) }))
+    .filter(({ m }) => m && !reduceMotion && 'IntersectionObserver' in window);
+  const runCounter = ({ el, m: [, pre, num, post] }) => {
+    const target = parseFloat(num);
+    const decimals = (num.split('.')[1] || '').length;
+    const start = performance.now();
+    const tick = (t) => {
+      const p = Math.min(1, (t - start) / 1400);
+      el.textContent = `${pre}${(target * (1 - (1 - p) ** 3)).toFixed(decimals)}${post}`;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (counters.length) {
+    const co = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      runCounter(counters.find((c) => c.el === entry.target));
+      co.unobserve(entry.target);
+    }), { threshold: 0.5 });
+    counters.forEach((c) => { c.el.textContent = `${c.m[1]}0${c.m[3]}`; co.observe(c.el); });
+  }
+
+  // Palabra que rota en el inicio ("Seguros de auto / camiones / …")
+  document.querySelectorAll('.rotator[data-words]').forEach((el) => {
+    const words = JSON.parse(el.dataset.words);
+    if (reduceMotion || words.length < 2) return;
+    let i = 0;
+    setInterval(() => {
+      el.classList.add('is-out');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.style.transition = 'none';
+        el.classList.replace('is-out', 'is-in');
+        void el.offsetWidth;
+        el.style.transition = '';
+        el.classList.remove('is-in');
+      }, 350);
+    }, 2400);
+  });
+
   // Formulario de contacto: arma el mensaje y lo abre en WhatsApp (no se guarda nada en el sitio).
   document.querySelectorAll('[data-wa-form]').forEach((form) => {
     const tpl = JSON.parse(form.dataset.msg);

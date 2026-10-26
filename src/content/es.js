@@ -34,6 +34,9 @@ module.exports = {
     mapTitle: 'Mapa de la oficina de New Horizons Insurance en Tampa',
     booking: 'Agendar una cita en línea',
     photoSoon: 'Foto próximamente',
+    rotator: { before: 'Seguros de', words: ['auto', 'camiones', 'negocios', 'hogar', 'SR-22'], after: 'en Tampa, Florida.' },
+    quick: { title: 'Cotiza en minutos', text: 'Elige qué quieres asegurar y te respondemos por WhatsApp.' },
+    recommended: 'Más completo',
     profileSoon: 'Perfil próximamente',
     form: {
       label: 'Escríbenos',
@@ -76,6 +79,7 @@ module.exports = {
     hero: {
       label: 'Agencia independiente de seguros — Tampa, Florida',
       title: 'Tu tranquilidad es nuestra prioridad.',
+      highlight: 'nuestra prioridad.',
       sub: 'Expertos en seguros de autos, camiones comerciales y hogar en Tampa. Comparamos las mejores compañías del país para darte la cobertura que cumple con la ley y que de verdad te protege.',
       manifesto: '“Protegemos tu futuro y el de tu negocio.”',
       meta: [['Oficina', 'Tampa, Florida'], ['Google', '4.9 ★ · 263 reseñas'], ['Idiomas', 'Español · English']],
@@ -183,6 +187,7 @@ module.exports = {
     hero: {
       label: 'Seguro de Auto — Tampa, Florida',
       title: 'Seguro de Auto',
+      highlight: 'Auto',
       lines: [['Niveles', '#niveles'], ['Coberturas', '#coberturas'], ['Non-Owner', '#non-owner'], ['Tu perfil', '#perfil'], ['SR-22 y FR-44', '#sr22']],
       sub: 'En Florida, todo vehículo registrado debe tener seguro de forma continua, aunque no se esté manejando. Te ayudamos a encontrar la cobertura que cumple con la ley y que de verdad te protege, sin importar tu historial de manejo.',
       meta: [['Mínimo en Florida', 'PIP + PDL $10,000'], ['Para', 'Con o sin carro propio'], ['Trámites', 'SR-22 · FR-44']],
@@ -259,6 +264,7 @@ module.exports = {
     hero: {
       label: 'Seguro Comercial — Tampa, Florida',
       title: 'Seguro Comercial',
+      highlight: 'Comercial',
       lines: [['Negocios en general', '#negocios'], ['Camiones y transporte', '#camiones']],
       sub: 'Tu negocio es tu patrimonio. Protegemos a empresas, contratistas, transportistas independientes y flotas en Tampa con coberturas que cumplen con la ley y te respaldan ante accidentes, demandas y pérdidas.',
       meta: [['Para', 'Empresas y contratistas'], ['Transporte', 'Camioneros y flotas'], ['Cumplimiento', 'Leyes de Florida']],
@@ -302,6 +308,7 @@ module.exports = {
     hero: {
       label: 'Hogar y Alquiler — Tampa, Florida',
       title: 'Seguro de Hogar y Alquiler',
+      highlight: 'Hogar y Alquiler',
       lines: [['Coberturas', '#coberturas'], ['Huracanes', '#huracanes']],
       sub: 'Tu hogar es donde vive tu familia. Ya seas propietario o inquilino, te ayudamos a proteger tu casa, tus pertenencias y tu tranquilidad ante robos, accidentes y la temporada de huracanes en Tampa.',
       meta: [['Para', 'Propietarios e inquilinos'], ['Incluye', 'Inundación · Casas móviles'], ['Temporada', 'Huracanes en Tampa']],
@@ -341,6 +348,7 @@ module.exports = {
     hero: {
       label: 'Quiénes somos — Tampa, Florida',
       title: 'Somos New Horizons.',
+      highlight: 'New Horizons.',
       lines: [['Nuestra historia', '#nosotros'], ['María', '#maria'], ['El equipo', '#equipo']],
       sub: 'Una agencia independiente de seguros con oficina en Tampa y un equipo bilingüe que compara por ti, te explica cada detalle y te acompaña después de firmar.',
       meta: [['Oficina', 'Palm River Rd · Tampa'], ['Google', '4.9 ★ · 263 reseñas'], ['Aseguradoras', '35 compañías']],

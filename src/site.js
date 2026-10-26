@@ -83,4 +83,14 @@ module.exports = {
     { id: 'nory', name: 'Nory', photo: 'nory.jpg' },
   ],
   groupPhoto: 'equipo.jpg',
+  // Fotos gratuitas de Unsplash (licencia libre para uso comercial): id de cada foto.
+  photos: {
+    hero: 'photo-1561063139-e183e66909c4',
+    about: 'photo-1609964956781-519678450be5',
+    auto: { card: 'photo-1668966643905-bf39ebd0577b', hero: 'photo-1701688734887-f9e0e5be31dd' },
+    commercial: { card: 'photo-1778103617525-76877c583fa5', hero: 'photo-1766785368863-f2188a8c8b32' },
+    property: { card: 'photo-1583608205776-bfd35f0d9f83', hero: 'photo-1693837851506-93d3d01d4f44' },
+    sr22: 'photo-1791268734854-aa1ec3b79e09',
+    hurricane: 'photo-1500056363169-ebc595d60d0f',
+  },
 };

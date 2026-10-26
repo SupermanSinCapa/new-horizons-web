@@ -32,8 +32,21 @@ const pad = (n) => String(n).padStart(2, '0');
 const wa = (text) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 const ext = 'target="_blank" rel="noopener"';
 
+// Fotos de Unsplash servidas desde su CDN en varios tamaños.
+const photo = (id, w) => `https://images.unsplash.com/${id}?w=${w}&q=70&auto=format&fit=crop`;
+function img(id, { sizes = '100vw', widths = [640, 1024, 1600, 2200], alt = '', cls = '', eager = false } = {}) {
+  const srcset = widths.map((w) => `${photo(id, w)} ${w}w`).join(', ');
+  return `<img${cls ? ` class="${cls}"` : ''} src="${esc(photo(id, widths[1]))}" srcset="${esc(srcset)}" sizes="${sizes}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+}
+
+// Evita que "SR-22" / "FR-44" se partan al final de una línea.
+const nobr = (s) => s.replace(/\b(SR|FR)-(\d+)/g, '<span class="nowrap">$1-$2</span>');
+
+// Resalta con degradado la parte indicada del título (p. ej. "nuestra prioridad.").
+const highlight = (title, part) => (part && title.includes(part) ? title.replace(part, `<span class="text-gradient">${part}</span>`) : title);
+
 const svg = (body, { fill = false } = {}) =>
-  `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ${fill ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"'}>${body}</svg>`;
+  `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ${fill ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"'}>${body}</svg>`;
 
 const icon = {
   arrow: svg('<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>'),
@@ -43,53 +56,162 @@ const icon = {
   close: svg('<path d="M18 6 6 18M6 6l12 12"/>'),
   instagram: svg('<rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>'),
   facebook: svg('<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'),
-  play: svg('<path d="M7 4.5v15l12-7.5z"/>', { fill: true }),
-  calendar: svg('<rect x="3" y="4.5" width="18" height="17" rx="1"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>'),
+  calendar: svg('<rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>'),
   pin: svg('<path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>'),
+  car: svg('<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>'),
+  van: svg('<path d="M3 6h11a2 2 0 0 1 2 2v9H3z"/><path d="M16 9h3l3 4v4h-6"/><circle cx="7" cy="17.5" r="2"/><circle cx="18" cy="17.5" r="2"/>'),
+  truck: svg('<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.6a1 1 0 0 0-.2-.6l-3.5-4.4a1 1 0 0 0-.8-.4H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>'),
+  home: svg('<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .7-1.5l7-6a2 2 0 0 1 2.6 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'),
+  shield: svg('<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/>'),
+  shieldCheck: svg('<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>'),
+  alert: svg('<path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"/><path d="M12 9v4M12 17h.01"/>'),
+  gem: svg('<path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6M2 9h20"/>'),
+  sailboat: svg('<path d="M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4z"/><path d="M21 14 10 2 3 14z"/><path d="M10 2v16"/>'),
+  users: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>'),
+  building: svg('<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/>'),
+  hardhat: svg('<path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/>'),
+  fileCheck: svg('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/>'),
+  umbrella: svg('<path d="M22 12a10 10 0 0 0-20 0z"/><path d="M12 12v8a2 2 0 0 0 4 0M12 2v1"/>'),
+  wrench: svg('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/>'),
+  package: svg('<path d="M11 21.7a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7z"/><path d="M12 22V12M3.3 7l8.7 5 8.7-5M7.5 4.3l9 5.1"/>'),
+  warehouse: svg('<path d="M22 8.4V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.4a2 2 0 0 1 1.3-1.9l8-3.2a2 2 0 0 1 1.4 0l8 3.2A2 2 0 0 1 22 8.4z"/><path d="M6 18h12M6 14h12"/><rect x="6" y="10" width="12" height="12"/>'),
+  waves: svg('<path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>'),
+  key: svg('<path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4M21 2l-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/>'),
+  caravan: svg('<rect x="2" y="9" width="4" height="4"/><rect x="10" y="9" width="4" height="10"/><path d="M18 19V9a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v8a2 2 0 0 0 2 2h2M10 19h12v-2"/><circle cx="8" cy="19" r="2"/>'),
+  badge: svg('<path d="M3.9 8.6a4 4 0 0 1 4.7-4.8 4 4 0 0 1 6.8 0 4 4 0 0 1 4.8 4.8 4 4 0 0 1 0 6.7 4 4 0 0 1-4.8 4.8 4 4 0 0 1-6.7 0 4 4 0 0 1-4.8-4.8 4 4 0 0 1 0-6.7z"/><path d="m9 12 2 2 4-4"/>'),
+  languages: svg('<path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/>'),
+  play: svg('<path d="M7 4.5v15l12-7.5z"/>', { fill: true }),
   google: '<svg class="icon icon-google" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.1 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.8 3.6-4.9 6.7-4.9z"/></svg>',
   whatsapp: svg('<path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.33 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41"/>', { fill: true }),
 };
 
+// Ícono de cada cobertura según su nombre (en español o inglés). El orden importa.
+const ICON_RULES = [
+  [/alto riesgo|high-risk|high risk/i, 'alert'],
+  [/clásic|classic/i, 'gem'],
+  [/recreativ|recreational/i, 'sailboat'],
+  [/mayores|senior/i, 'users'],
+  [/exenci|exemption/i, 'fileCheck'],
+  [/workers|compensaci/i, 'hardhat'],
+  [/auto comercial|commercial auto/i, 'van'],
+  [/paraguas|umbrella/i, 'umbrella'],
+  [/primaria|primary/i, 'shield'],
+  [/físicos|physical/i, 'wrench'],
+  [/carga para|motor truck cargo/i, 'package'],
+  [/sin carga|non-trucking|bobtail/i, 'truck'],
+  [/transportistas|truckers/i, 'warehouse'],
+  [/general liability|civil general/i, 'building'],
+  [/inundaci|flood/i, 'waves'],
+  [/alquiler|renters/i, 'key'],
+  [/móviles|mobile/i, 'caravan'],
+  [/propietarios|homeowners/i, 'home'],
+  [/estándar|standard/i, 'badge'],
+];
+const iconFor = (text) => icon[(ICON_RULES.find(([re]) => re.test(text)) || [null, 'shieldCheck'])[1]];
+const COVERAGE_ICONS = { auto: 'car', commercial: 'truck', property: 'home' };
+const WHY_ICONS = ['shieldCheck', 'languages', 'car', 'pin'];
+
 // ---------- Piezas compartidas ----------
 
 const head = (n, label) =>
-  `<div class="section-head reveal"><span class="section-num">${pad(n)}</span><span class="section-label">${label}</span></div>`;
+  `<p class="section-head reveal"><span class="section-num">${pad(n)}</span><span class="section-label">${label}</span></p>`;
+
+const eyebrow = (text, cls = '') => `<p class="eyebrow${cls}"><span class="eyebrow-dot" aria-hidden="true"></span>${text}</p>`;
 
 const ctaButtons = (c, waText) => `
       <a class="btn btn-solid" href="${wa(waText)}" ${ext}>${icon.whatsapp}<span>${c.ui.whatsapp}</span></a>
       <a class="btn btn-outline" href="tel:${site.phone.tel}">${icon.phone}<span>${c.ui.call} ${site.phone.display}</span></a>`;
 
-const horizonArt = `
-  <svg class="hero-art" viewBox="0 0 800 800" aria-hidden="true" focusable="false">
-    <circle cx="400" cy="400" r="398" fill="none" stroke="currentColor" stroke-width="1"/>
-    <circle cx="400" cy="400" r="262" fill="none" stroke="currentColor" stroke-width="1"/>
-    <line x1="0" y1="400" x2="800" y2="400" stroke="currentColor" stroke-width="1"/>
-    <line x1="400" y1="2" x2="400" y2="400" stroke="currentColor" stroke-width="1"/>
-    <circle class="hero-art-dot" cx="269" cy="173" r="11" fill="currentColor"/>
-  </svg>`;
+const orbs = '<div class="hero-orbs" aria-hidden="true"><span></span><span></span><span></span></div>';
 
-function hero(c, h, { waText, lines, isHome }) {
+const statsList = (stats) => `<dl class="stats">
+      ${stats.map(([v, k]) => `<div class="stat"><dt class="stat-label">${k}</dt><dd class="stat-value" data-count="${esc(v)}">${v}</dd></div>`).join('\n      ')}
+    </dl>`;
+
+function quickCard(c) {
+  const q = c.ui.quick;
+  return `<aside class="hero-card reveal">
+      <p class="hero-card-title">${q.title}</p>
+      <p class="hero-card-text">${q.text}</p>
+      <div class="quick-grid">
+        ${Object.entries(COVERAGE_ICONS).map(([k, ic]) => `<a class="quick" href="${wa(c[k].hero.wa)}" ${ext}>${icon[ic]}<span>${c.ui.nav[k]}</span></a>`).join('\n        ')}
+      </div>
+      <a class="hero-rating" href="${google.reviews}" ${ext}>${icon.google}<span class="hero-rating-score">${site.rating.value}</span><span class="stars" aria-hidden="true">★★★★★</span><span class="hero-rating-count">${c.home.reviews.count}</span></a>
+    </aside>`;
+}
+
+const metaCard = (meta) => `<dl class="hero-card hero-meta reveal">
+      ${meta.map(([k, v]) => `<div class="meta-item"><dt class="meta-label">${k}</dt><dd class="meta-value">${v}</dd></div>`).join('\n      ')}
+    </dl>`;
+
+function rotator(c) {
+  const r = c.ui.rotator;
+  return `<p class="hero-rotator reveal">${r.before ? `${r.before} ` : ''}<span class="rotator" data-words="${esc(JSON.stringify(r.words))}">${r.words[0]}</span> ${r.after}</p>`;
+}
+
+function hero(c, h, { waText, lines, photoId, isHome }) {
   const lineLinks = (lines || [])
     .map(([label, href]) => `<a href="${href}">${label}</a>`)
     .join('<span class="sep" aria-hidden="true">/</span>');
   return `
-<section class="hero${isHome ? '' : ' hero--page'}" aria-labelledby="hero-title">
-  ${horizonArt}
+<section class="hero${isHome ? ' hero--home' : ' hero--page'}" aria-labelledby="hero-title">
+  <div class="hero-media" aria-hidden="true">${img(photoId, { eager: true })}</div>
+  ${orbs}
   <div class="container hero-grid">
     <div class="hero-content">
-      <p class="hero-label reveal">${h.label}</p>
-      <h1 class="hero-title reveal" id="hero-title">${h.title}</h1>
+      ${eyebrow(h.label, ' reveal')}
+      <h1 class="hero-title reveal" id="hero-title">${highlight(h.title, h.highlight)}</h1>
+      ${isHome ? rotator(c) : ''}
       ${lineLinks ? `<p class="hero-lines reveal">${lineLinks}</p>` : ''}
       <p class="hero-sub reveal">${h.sub}</p>
-      ${h.manifesto ? `<p class="hero-manifesto reveal">${h.manifesto}</p>` : ''}
       <div class="hero-cta reveal">${ctaButtons(c, waText)}
       </div>
     </div>
-    <dl class="hero-meta reveal">
-      ${h.meta.map(([k, v]) => `<div class="meta-item"><dt class="meta-label">${k}</dt><dd class="meta-value">${v}</dd></div>`).join('\n      ')}
-    </dl>
+    ${isHome ? quickCard(c) : metaCard(h.meta)}
   </div>
-  <div class="hero-scroll" aria-hidden="true"><span class="scroll-line"></span><span>${c.ui.scroll}</span></div>
+</section>`;
+}
+
+// Tarjetas de coberturas con ícono (páginas de servicios).
+const list = (items) => `
+    <ul class="card-grid">
+      ${items.map((it, i) => `<li class="card spotlight reveal">
+        <div class="card-top"><span class="icon-bubble">${iconFor(`${it.title} ${it.tag}`)}</span><span class="card-num">${pad(i + 1)}</span></div>
+        <h3 class="card-title">${it.title}</h3>
+        <p class="card-tag">${it.tag}</p>
+        <p class="card-text">${it.text}</p>
+      </li>`).join('\n      ')}
+    </ul>`;
+
+function photoBand({ id, photoId, label, heading, text, buttons }) {
+  return `
+<section class="band band--photo"${id ? ` id="${id}"` : ''}>
+  <div class="band-media" aria-hidden="true">${img(photoId, { sizes: '100vw', widths: [800, 1400, 2000] })}</div>
+  <div class="container band-inner">
+    <div>
+      ${eyebrow(label, ' reveal')}
+      <h2 class="band-heading reveal">${nobr(heading)}</h2>
+    </div>
+    <div class="band-body reveal">
+      <p>${text}</p>
+      <div class="btn-row">${buttons}</div>
+    </div>
+  </div>
+</section>`;
+}
+
+function ctaBand(c, waText) {
+  const b = c.ui.ctaBand;
+  return `
+<section class="cta-band">
+  ${orbs}
+  <div class="container">
+    ${eyebrow(b.label, ' reveal')}
+    <h2 class="cta-heading reveal">${b.heading}</h2>
+    <p class="cta-text reveal">${b.text}</p>
+    <div class="cta-actions reveal">${ctaButtons(c, waText)}
+    </div>
+  </div>
 </section>`;
 }
 
@@ -106,33 +228,10 @@ function portrait(c, name, file, cls) {
 }
 
 function groupPhoto(c, caption) {
-  const img = hasPhoto(site.groupPhoto)
+  const inner = hasPhoto(site.groupPhoto)
     ? `<img src="/assets/img/team/${site.groupPhoto}" alt="${esc(caption)}" loading="lazy" decoding="async">`
     : `<div class="photo-placeholder" role="img" aria-label="${esc(caption)}"><span class="ph-initials">NH</span><span class="ph-note">${c.ui.photoSoon}</span></div>`;
-  return `<figure class="group-photo reveal">${img}<figcaption>${caption}</figcaption></figure>`;
-}
-
-const list = (items) => `
-    <ol class="list">
-      ${items.map((it, i) => `<li class="list-item reveal">
-        <span class="list-num">(${pad(i + 1)})</span>
-        <div class="list-head"><h3 class="list-title">${it.title}</h3><p class="list-tag">${it.tag}</p></div>
-        <p class="list-text">${it.text}</p>
-      </li>`).join('\n      ')}
-    </ol>`;
-
-function ctaBand(c, waText) {
-  const b = c.ui.ctaBand;
-  return `
-<section class="section contact cta-band">
-  <div class="container">
-    <p class="contact-label reveal">${b.label}</p>
-    <h2 class="contact-heading reveal">${b.heading}</h2>
-    <p class="contact-text reveal">${b.text}</p>
-    <div class="contact-cta reveal">${ctaButtons(c, waText)}
-    </div>
-  </div>
-</section>`;
+  return `<figure class="group-photo reveal">${inner}<figcaption>${caption}</figcaption></figure>`;
 }
 
 function header(c, key) {
@@ -145,7 +244,7 @@ function header(c, key) {
 <header class="nav" id="nav">
   <div class="nav-inner">
     <a class="nav-logo" href="${r.home}" aria-label="New Horizons Insurance — ${c.ui.home}">
-      <img src="/assets/img/logo-symbol-color.svg" alt="" width="48" height="32">
+      <img src="/assets/img/logo-symbol-light.svg" alt="" width="44" height="29">
       <span class="nav-logo-text" aria-hidden="true"><span class="nav-logo-name">New Horizons</span><span class="nav-logo-sub">Insurance Inc.</span></span>
     </a>
     <nav class="nav-menu" id="nav-menu" aria-label="${c.ui.navLabel}">
@@ -226,7 +325,7 @@ function assistant(c) {
   <button class="assistant-fab" type="button" aria-expanded="false" aria-controls="assistant-panel">${icon.chat}<span>${a.open}</span></button>
   <section class="assistant-panel" id="assistant-panel" role="dialog" aria-labelledby="assistant-title" hidden>
     <header class="assistant-head">
-      <img src="/assets/img/logo-symbol-color.svg" alt="" width="42" height="28">
+      <img src="/assets/img/logo-symbol-light.svg" alt="" width="42" height="28">
       <div>
         <p class="assistant-title" id="assistant-title">${a.title}</p>
         <p class="assistant-sub"><span class="assistant-dot" aria-hidden="true"></span>${a.subtitle}</p>
@@ -274,6 +373,8 @@ function jsonLd(c) {
   return `<script type="application/ld+json">${JSON.stringify(ld)}</script>`;
 }
 
+const FONTS = 'https://fonts.googleapis.com/css2?family=Antic+Didone&family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Grotesk:wght@500;600;700&display=swap';
+
 function layout(c, key, body) {
   const page = c[key];
   const url = site.url + c.routes[key];
@@ -289,7 +390,7 @@ ${PREVIEW ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical
 <link rel="alternate" hreflang="es" href="${alt('es')}">
 <link rel="alternate" hreflang="en" href="${alt('en')}">
 <link rel="alternate" hreflang="x-default" href="${alt('es')}">
-<meta name="theme-color" content="#FBF9F4">
+<meta name="theme-color" content="#05070D">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="New Horizons Insurance">
 <meta property="og:title" content="${esc(page.meta.title)}">
@@ -301,7 +402,8 @@ ${PREVIEW ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="${FONTS}">
 <link rel="stylesheet" href="/assets/css/styles.css?v=${VERSION}">
 <script>document.documentElement.classList.add('js')</script>
 ${jsonLd(c)}
@@ -326,8 +428,14 @@ function homePage(c) {
   const h = c.home;
   const ids = IDS[c.lang];
   const r = c.routes;
-  const covKeys = ['auto', 'commercial', 'property'];
   const ig = site.instagram;
+
+  const stats = `
+<section class="stats-strip" aria-label="${esc(c.about.intro.label)}">
+  <div class="container">
+    ${statsList(c.about.intro.stats)}
+  </div>
+</section>`;
 
   const coverages = `
 <section class="section" id="${ids.coverages}">
@@ -335,14 +443,17 @@ function homePage(c) {
     ${head(1, h.coverages.label)}
     <h2 class="section-heading reveal">${h.coverages.heading}</h2>
     <div class="cov-grid">
-      ${covKeys.map((k, i) => {
+      ${Object.entries(COVERAGE_ICONS).map(([k, ic]) => {
         const it = h.coverages.items[k];
-        return `<a class="cov-card reveal" href="${r[k]}">
-        <span class="cov-top"><span class="cov-num">${pad(i + 1)}</span><span class="cov-kicker">${it.kicker}</span></span>
-        <h3 class="cov-title">${it.title}</h3>
-        <p class="cov-text">${it.text}</p>
-        <ul class="cov-points">${it.points.map((p) => `<li>${p}</li>`).join('')}</ul>
-        <span class="cov-link">${c.ui.seeCoverages} ${icon.arrow}</span>
+        return `<a class="cov-card spotlight reveal" href="${r[k]}">
+        <div class="cov-media">${img(site.photos[k].card, { sizes: '(max-width: 900px) 100vw, 33vw', widths: [480, 800, 1200] })}</div>
+        <div class="cov-body">
+          <div class="cov-top"><span class="icon-bubble">${icon[ic]}</span><span class="cov-kicker">${it.kicker}</span></div>
+          <h3 class="cov-title">${it.title}</h3>
+          <p class="cov-text">${it.text}</p>
+          <ul class="cov-points">${it.points.map((p) => `<li>${p}</li>`).join('')}</ul>
+          <span class="cov-link">${c.ui.seeCoverages} ${icon.arrow}</span>
+        </div>
       </a>`;
       }).join('\n      ')}
     </div>
@@ -350,54 +461,51 @@ function homePage(c) {
 </section>`;
 
   const why = `
-<section class="section section-alt" id="${ids.why}">
+<section class="section section--glow" id="${ids.why}">
   <div class="container">
     ${head(2, h.why.label)}
-    <div class="split">
-      <div class="split-aside reveal">
-        <p class="big-number">${h.why.big.replace('+', '<span class="gold">+</span>')}</p>
+    <h2 class="sr-only">${h.why.label}</h2>
+    <div class="bento">
+      <div class="bento-stat reveal">
+        <p class="big-number" data-count="${esc(h.why.big)}">${h.why.big}</p>
         <p class="big-text">${h.why.bigText}</p>
         <figure class="quote">
           <blockquote>“${h.why.quote.text}”</blockquote>
           <figcaption>${h.why.quote.by} — ${h.why.quote.role}</figcaption>
         </figure>
       </div>
-      <div class="rows">
-        ${h.why.items.map((it) => `<article class="row reveal"><h3 class="row-title">${it.title}</h3><p class="row-tag">${it.tag}</p><p class="row-text">${it.text}</p></article>`).join('\n        ')}
-      </div>
+      ${h.why.items.map((it, i) => `<article class="bento-card spotlight reveal">
+        <span class="icon-bubble">${icon[WHY_ICONS[i]]}</span>
+        <h3 class="bento-title">${it.title}</h3>
+        <p class="bento-tag">${it.tag}</p>
+        <p class="bento-text">${it.text}</p>
+      </article>`).join('\n      ')}
     </div>
   </div>
 </section>`;
 
-  const sr22 = `
-<section class="band">
-  <div class="container band-inner">
-    <div>
-      <p class="eyebrow reveal">${h.sr22.label}</p>
-      <h2 class="band-heading reveal">${h.sr22.heading}</h2>
-    </div>
-    <div class="band-body reveal">
-      <p>${h.sr22.text}</p>
-      <div class="btn-row">
-        <a class="btn btn-solid" href="${wa(h.sr22.wa)}" ${ext}>${icon.whatsapp}<span>${c.ui.whatsapp}</span></a>
-        <a class="btn btn-outline" href="${r.auto}#${c.auto.sr22.id}">${h.sr22.more}</a>
-      </div>
-    </div>
-  </div>
-</section>`;
+  const sr22 = photoBand({
+    photoId: site.photos.sr22,
+    label: h.sr22.label,
+    heading: h.sr22.heading,
+    text: h.sr22.text,
+    buttons: `<a class="btn btn-solid" href="${wa(h.sr22.wa)}" ${ext}>${icon.whatsapp}<span>${c.ui.whatsapp}</span></a>
+        <a class="btn btn-outline" href="${r.auto}#${c.auto.sr22.id}">${h.sr22.more} ${icon.arrow}</a>`,
+  });
 
   const steps = `
 <section class="section" id="${ids.steps}">
   <div class="container">
     ${head(3, h.steps.label)}
+    <h2 class="sr-only">${h.steps.label}</h2>
     <ol class="steps">
-      ${h.steps.items.map((s, i) => `<li class="step reveal"><span class="step-num">(${pad(i + 1)})</span><p class="step-title">${s.title}</p><p class="step-text">${s.text}</p></li>`).join('\n      ')}
+      ${h.steps.items.map((s, i) => `<li class="step spotlight reveal"><span class="step-num">${pad(i + 1)}</span><p class="step-title">${s.title}</p><p class="step-text">${s.text}</p></li>`).join('\n      ')}
     </ol>
   </div>
 </section>`;
 
   const about = `
-<section class="section" id="${ids.about}">
+<section class="section section--glow" id="${ids.about}">
   <div class="container">
     ${head(4, h.about.label)}
     <div class="about-teaser">
@@ -412,13 +520,13 @@ function homePage(c) {
 </section>`;
 
   const reviews = `
-<section class="section section-alt" id="${ids.reviews}">
+<section class="section" id="${ids.reviews}">
   <div class="container">
     ${head(5, h.reviews.label)}
     <div class="split split--reviews">
-      <div class="split-aside reveal">
+      <div class="split-aside rating-card reveal">
         <p class="rating-source">${icon.google}<span>Google</span></p>
-        <p class="big-number">${site.rating.value}</p>
+        <p class="big-number" data-count="${site.rating.value}">${site.rating.value}</p>
         <p class="stars" role="img" aria-label="${site.rating.value} / 5">★★★★★</p>
         <p class="rating-count">${h.reviews.count}</p>
         <div class="rating-links">
@@ -430,7 +538,7 @@ function homePage(c) {
         <h2 class="section-heading reveal">${h.reviews.heading}</h2>
         ${h.reviews.note ? `<p class="review-note reveal">${h.reviews.note}</p>` : ''}
         <ul class="review-grid">
-          ${h.reviews.items.map((rv) => `<li class="review-card reveal">
+          ${h.reviews.items.map((rv) => `<li class="review-card spotlight reveal">
             <div class="review-top"><span class="stars" role="img" aria-label="5 / 5">★★★★★</span>${icon.google}</div>
             <blockquote><p>${rv.text}</p></blockquote>
             <p class="review-author"><span class="avatar" aria-hidden="true">${initials(rv.by)}</span><span><span class="review-by">${rv.by}</span><span class="review-source">${h.reviews.source}</span></span></p>
@@ -446,7 +554,7 @@ function homePage(c) {
     ? `<div class="ig-grid" data-ig-feed="${esc(ig.feedUrl)}" data-ig-types="${esc(JSON.stringify(h.instagram.types))}"></div>`
     : `<div class="ig-embed"><iframe src="https://www.instagram.com/${ig.handle}/embed/" title="${esc(h.instagram.frameTitle)}" loading="lazy" scrolling="no"></iframe></div>`;
   const instagram = `
-<section class="section" id="${ids.instagram}">
+<section class="section section--glow" id="${ids.instagram}">
   <div class="container">
     ${head(6, h.instagram.label)}
     <div class="ig-layout">
@@ -467,7 +575,7 @@ function homePage(c) {
   // Sin loading="lazy": el navegador no detecta los logos que entran deslizándose y quedaban vacíos.
   const logo = (ca) => `<li class="logo-item" title="${esc(ca.name)}"><img src="/assets/img/carriers/${ca.logo}" alt="${esc(ca.name)}" decoding="async"${ca.zoom ? ` style="--zoom:${ca.zoom}"` : ''}></li>`;
   const carriers = `
-<section class="section section--compact section-alt" id="${ids.carriers}">
+<section class="section section--compact" id="${ids.carriers}">
   <div class="container">
     ${head(7, h.carriers.label)}
     <h2 class="section-heading reveal">${h.carriers.heading}</h2>
@@ -482,9 +590,8 @@ function homePage(c) {
 
   const contact = contactSection(c, 8, ids.contact);
 
-  const lines = covKeys.map((k) => [h.coverages.items[k].title, r[k]]);
-  return hero(c, h.hero, { waText: c.ui.waDefault, lines, isHome: true })
-    + coverages + why + sr22 + steps + about + reviews + instagram + carriers + contact;
+  return hero(c, h.hero, { waText: c.ui.waDefault, photoId: site.photos.hero, isHome: true })
+    + stats + coverages + why + sr22 + steps + about + reviews + instagram + carriers + contact;
 }
 
 // Contacto: formulario que arma un mensaje de WhatsApp + mapa + datos de la oficina.
@@ -499,7 +606,7 @@ function contactSection(c, n, id) {
     <h2 class="section-heading reveal">${c.home.contact.heading}</h2>
     <div class="contact-layout">
       <form class="contact-form reveal" data-wa-form data-wa="${site.whatsapp}" data-msg="${msg}" novalidate>
-        <p class="eyebrow">${f.label}</p>
+        ${eyebrow(f.label)}
         <h3 class="form-heading">${f.heading}</h3>
         <div class="field">
           <label for="cf-name">${f.name}</label>
@@ -536,7 +643,7 @@ function contactSection(c, n, id) {
       <div class="contact-side reveal">
         <div class="map">
           <iframe src="${google.embed(c.lang)}" title="${esc(c.ui.mapTitle)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-          <svg class="map-pin" viewBox="0 0 34 44" aria-hidden="true" focusable="false"><path d="M17 1C8.2 1 1 8 1 16.8 1 28.5 17 43 17 43s16-14.5 16-26.2C33 8 25.8 1 17 1z" fill="#BD9B5B" stroke="#F5F2EC" stroke-width="1.5"/><circle cx="17" cy="16.5" r="6" fill="#091A3F"/></svg>
+          <svg class="map-pin" viewBox="0 0 34 44" aria-hidden="true" focusable="false"><path d="M17 1C8.2 1 1 8 1 16.8 1 28.5 17 43 17 43s16-14.5 16-26.2C33 8 25.8 1 17 1z" fill="#D4AE68" stroke="#05070D" stroke-width="1.5"/><circle cx="17" cy="16.5" r="6" fill="#05070D"/></svg>
         </div>
         <dl class="contact-list">
           <div class="contact-item">
@@ -568,25 +675,29 @@ function autoPage(c) {
     ${head(1, p.tiers.label)}
     <h2 class="section-heading reveal">${p.tiers.heading}</h2>
     <div class="tiers">
-      ${p.tiers.items.map((t, i) => `<article class="tier reveal">
+      ${p.tiers.items.map((t, i) => {
+        const featured = i === p.tiers.items.length - 1;
+        return `<article class="tier spotlight${featured ? ' tier--featured' : ''} reveal">
         <p class="tier-top"><span class="section-num">${pad(i + 1)}</span><span class="tier-tag">${t.tag}</span></p>
+        ${featured ? `<span class="tier-badge">${c.ui.recommended}</span>` : ''}
         <h3 class="tier-name">${t.name}</h3>
         <dl>
           <dt>${p.tiers.includes}</dt><dd>${t.includes}</dd>
           <dt>${p.tiers.for}</dt><dd>${t.for}</dd>
         </dl>
-      </article>`).join('\n      ')}
+      </article>`;
+      }).join('\n      ')}
     </div>
   </div>
 </section>`;
 
   const glossary = `
-<section class="section section-alt" id="${p.glossary.id}">
+<section class="section section--glow" id="${p.glossary.id}">
   <div class="container">
     ${head(2, p.glossary.label)}
     <h2 class="section-heading reveal">${p.glossary.heading}</h2>
     <dl class="glossary">
-      ${p.glossary.items.map((g) => `<div class="gloss-row reveal"><dt><span class="gloss-term">${g.term}</span><span class="gloss-name">${g.name}</span></dt><dd>${g.text}</dd></div>`).join('\n      ')}
+      ${p.glossary.items.map((g) => `<div class="gloss-row spotlight reveal"><dt><span class="gloss-term">${g.term}</span><span class="gloss-name">${g.name}</span></dt><dd>${g.text}</dd></div>`).join('\n      ')}
     </dl>
     <p class="note reveal"><span>${p.glossary.noteLabel}</span>${p.glossary.note}</p>
   </div>
@@ -596,18 +707,19 @@ function autoPage(c) {
 <section class="section" id="${p.nonOwner.id}">
   <div class="container">
     ${head(3, p.nonOwner.label)}
-    <div class="feature">
-      <h2 class="feature-heading reveal">${p.nonOwner.heading}</h2>
+    <div class="feature feature--media">
       <div class="feature-body reveal">
+        <h2 class="feature-heading">${p.nonOwner.heading}</h2>
         <p>${p.nonOwner.text}</p>
         <a class="btn btn-solid" href="${wa(p.nonOwner.wa)}" ${ext}>${icon.whatsapp}<span>${p.nonOwner.cta}</span></a>
       </div>
+      <div class="feature-photo reveal">${img(site.photos.auto.card, { sizes: '(max-width: 1100px) 100vw, 50vw', widths: [640, 1000, 1400] })}</div>
     </div>
   </div>
 </section>`;
 
   const profiles = `
-<section class="section section-alt" id="${p.profiles.id}">
+<section class="section section--glow" id="${p.profiles.id}">
   <div class="container">
     ${head(4, p.profiles.label)}
     <h2 class="section-heading reveal">${p.profiles.heading}</h2>
@@ -639,7 +751,7 @@ function autoPage(c) {
   </div>
 </section>`;
 
-  return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines })
+  return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines, photoId: site.photos.auto.hero })
     + tiers + glossary + nonOwner + profiles + sr22 + ctaBand(c, p.hero.wa);
 }
 
@@ -647,7 +759,7 @@ function groupsPage(c, key) {
   const p = c[key];
   let n = 0;
   const groups = p.groups.map((g, i) => `
-<section class="section${i % 2 ? ' section-alt' : ''}" id="${g.id}">
+<section class="section${i % 2 ? ' section--glow' : ''}" id="${g.id}">
   <div class="container">
     ${head(++n, g.label)}
     <h2 class="section-heading reveal">${g.heading}</h2>
@@ -659,21 +771,17 @@ function groupsPage(c, key) {
 </section>`).join('');
 
   const hu = p.hurricane;
-  const hurricane = hu ? `
-<section class="band" id="${hu.id}">
-  <div class="container band-inner">
-    <div>
-      <p class="eyebrow reveal">${pad(++n)} — ${hu.label}</p>
-      <h2 class="band-heading reveal">${hu.heading}</h2>
-    </div>
-    <div class="band-body reveal">
-      <p>${hu.text}</p>
-      <div class="btn-row"><a class="btn btn-solid" href="${wa(hu.wa)}" ${ext}>${icon.whatsapp}<span>${hu.cta}</span></a></div>
-    </div>
-  </div>
-</section>` : '';
+  const hurricane = hu ? photoBand({
+    id: hu.id,
+    photoId: site.photos.hurricane,
+    label: `${pad(++n)} — ${hu.label}`,
+    heading: hu.heading,
+    text: hu.text,
+    buttons: `<a class="btn btn-solid" href="${wa(hu.wa)}" ${ext}>${icon.whatsapp}<span>${hu.cta}</span></a>`,
+  }) : '';
 
-  return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines }) + groups + hurricane + ctaBand(c, p.hero.wa);
+  return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines, photoId: site.photos[key].hero })
+    + groups + hurricane + ctaBand(c, p.hero.wa);
 }
 
 function aboutPage(c) {
@@ -686,22 +794,20 @@ function aboutPage(c) {
       <h2 class="feature-heading reveal">${p.intro.heading}</h2>
       <div class="feature-body reveal">${p.intro.paragraphs.map((t) => `<p>${t}</p>`).join('')}</div>
     </div>
-    <dl class="stats reveal">
-      ${p.intro.stats.map(([v, k]) => `<div class="stat"><dt class="stat-label">${k}</dt><dd class="stat-value">${v}</dd></div>`).join('\n      ')}
-    </dl>
+    <div class="reveal">${statsList(p.intro.stats)}</div>
   </div>
 </section>`;
 
   const maria = site.team.find((m) => m.id === 'maria');
   const m = p.maria;
   const mariaSection = `
-<section class="section section-alt" id="${m.id}">
+<section class="section section--glow" id="${m.id}">
   <div class="container">
     ${head(2, m.label)}
     <div class="profile">
       <div class="profile-photo reveal">${portrait(c, maria.name, maria.photo, 'portrait portrait--large')}</div>
       <div class="profile-body reveal">
-        <p class="eyebrow">${m.role}</p>
+        ${eyebrow(m.role)}
         <h2 class="feature-heading">${maria.name}</h2>
         ${m.bio.map((t) => `<p>${t}</p>`).join('')}
         <figure class="quote"><blockquote>“${m.quote}”</blockquote><figcaption>${maria.name}</figcaption></figure>
@@ -721,18 +827,21 @@ function aboutPage(c) {
     <ul class="team-grid">
       ${site.team.map((mem) => {
         const info = t.members[mem.id] || {};
-        return `<li class="team-card reveal">
+        return `<li class="team-card spotlight reveal">
         ${portrait(c, mem.name, mem.photo, 'portrait')}
-        <h3 class="team-name">${mem.name}</h3>
-        <p class="team-role">${info.role || c.ui.profileSoon}</p>
-        ${info.text ? `<p class="team-text">${info.text}</p>` : ''}
+        <div class="team-body">
+          <h3 class="team-name">${mem.name}</h3>
+          <p class="team-role">${info.role || c.ui.profileSoon}</p>
+          ${info.text ? `<p class="team-text">${info.text}</p>` : ''}
+        </div>
       </li>`;
       }).join('\n      ')}
     </ul>
   </div>
 </section>`;
 
-  return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines }) + intro + mariaSection + team + ctaBand(c, p.hero.wa);
+  return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines, photoId: site.photos.about })
+    + intro + mariaSection + team + ctaBand(c, p.hero.wa);
 }
 
 function notFoundPage() {
@@ -746,15 +855,15 @@ function notFoundPage() {
 <title>Página no encontrada · Page not found | New Horizons Insurance</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Noto+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="${FONTS}">
 <link rel="stylesheet" href="/assets/css/styles.css?v=${VERSION}">
 </head>
 <body>
-<main class="hero" id="main">
-  ${horizonArt}
+<main class="hero hero--page" id="main">
+  ${orbs}
   <div class="container">
-    <p class="hero-label">Error 404</p>
-    <h1 class="hero-title">Página no encontrada.<br><span lang="en">Page not found.</span></h1>
+    ${eyebrow('Error 404')}
+    <h1 class="hero-title">Página no encontrada.<br><span class="text-gradient" lang="en">Page not found.</span></h1>
     <div class="hero-cta">
       <a class="btn btn-solid" href="${es.routes.home}">${es.ui.home}</a>
       <a class="btn btn-outline" href="${en.routes.home}" lang="en">${en.ui.home}</a>

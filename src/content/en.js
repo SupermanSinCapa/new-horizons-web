@@ -33,6 +33,9 @@ module.exports = {
     mapTitle: 'Map of the New Horizons Insurance office in Tampa',
     booking: 'Book an appointment online',
     photoSoon: 'Photo coming soon',
+    rotator: { before: '', words: ['Auto', 'Truck', 'Business', 'Home', 'SR-22'], after: 'insurance in Tampa, Florida.' },
+    quick: { title: 'Get a quote in minutes', text: 'Choose what you want to insure and we’ll reply on WhatsApp.' },
+    recommended: 'Most complete',
     profileSoon: 'Profile coming soon',
     form: {
       label: 'Write to us',
@@ -74,6 +77,7 @@ module.exports = {
     hero: {
       label: 'Independent insurance agency — Tampa, Florida',
       title: 'Your peace of mind is our priority.',
+      highlight: 'our priority.',
       sub: 'Auto, commercial truck and home insurance experts in Tampa. We compare top-rated companies to find you coverage that meets the law and truly protects you.',
       manifesto: '“We protect your future and your business.”',
       meta: [['Office', 'Tampa, Florida'], ['Google', '4.9 ★ · 263 reviews'], ['Languages', 'English · Español']],
@@ -180,6 +184,7 @@ module.exports = {
     hero: {
       label: 'Auto Insurance — Tampa, Florida',
       title: 'Auto Insurance',
+      highlight: 'Auto',
       lines: [['Levels', '#levels'], ['Coverages', '#coverages'], ['Non-Owner', '#non-owner'], ['Your profile', '#profile'], ['SR-22 & FR-44', '#sr22']],
       sub: 'In Florida, every registered vehicle must be continuously insured, even when it isn’t being driven. We help you find coverage that meets the law and truly protects you, whatever your driving record.',
       meta: [['Florida minimum', 'PIP + PDL $10,000'], ['For', 'Car owners & non-owners'], ['Filings', 'SR-22 · FR-44']],
@@ -256,6 +261,7 @@ module.exports = {
     hero: {
       label: 'Commercial Insurance — Tampa, Florida',
       title: 'Commercial Insurance',
+      highlight: 'Commercial',
       lines: [['General business', '#business'], ['Trucking & transport', '#trucking']],
       sub: 'Your business is your livelihood. We protect companies, contractors, independent truckers and fleets in Tampa with coverage that meets the law and backs you up against accidents, lawsuits and losses.',
       meta: [['For', 'Businesses & contractors'], ['Transport', 'Truckers & fleets'], ['Compliance', 'Florida law']],
@@ -299,6 +305,7 @@ module.exports = {
     hero: {
       label: 'Home & Renters — Tampa, Florida',
       title: 'Home & Renters Insurance',
+      highlight: 'Home & Renters',
       lines: [['Coverages', '#coverages'], ['Hurricanes', '#hurricanes']],
       sub: 'Your home is where your family lives. Whether you own or rent, we help you protect your house, your belongings and your peace of mind against theft, accidents and hurricane season in Tampa.',
       meta: [['For', 'Homeowners & renters'], ['Includes', 'Flood · Mobile homes'], ['Season', 'Tampa hurricanes']],
@@ -338,6 +345,7 @@ module.exports = {
     hero: {
       label: 'About us — Tampa, Florida',
       title: 'We are New Horizons.',
+      highlight: 'New Horizons.',
       lines: [['Our story', '#story'], ['María', '#maria'], ['The team', '#team']],
       sub: 'An independent insurance agency with an office in Tampa and a bilingual team that shops around for you, explains every detail and stays with you after you sign.',
       meta: [['Office', 'Palm River Rd · Tampa'], ['Google', '4.9 ★ · 263 reviews'], ['Insurers', '35 companies']],

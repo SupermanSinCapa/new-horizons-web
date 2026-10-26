@@ -1,0 +1,9 @@
+{
+  "name": "new-horizons-website",
+  "private": true,
+  "description": "Sitio web bilingüe de New Horizons Insurance Inc. (Tampa, FL)",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node dev.js"
+  }
+}

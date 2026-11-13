@@ -29,7 +29,8 @@ const google = {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const pad = (n) => String(n).padStart(2, '0');
-const wa = (text) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
+const waTo = (number, text) => `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+const wa = (text) => waTo(site.whatsapp, text);
 const ext = 'target="_blank" rel="noopener"';
 
 // Fotos de Unsplash servidas desde su CDN en varios tamaños.
@@ -81,6 +82,8 @@ const icon = {
   badge: svg('<path d="M3.9 8.6a4 4 0 0 1 4.7-4.8 4 4 0 0 1 6.8 0 4 4 0 0 1 4.8 4.8 4 4 0 0 1 0 6.7 4 4 0 0 1-4.8 4.8 4 4 0 0 1-6.7 0 4 4 0 0 1-4.8-4.8 4 4 0 0 1 0-6.7z"/><path d="m9 12 2 2 4-4"/>'),
   languages: svg('<path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/>'),
   play: svg('<path d="M7 4.5v15l12-7.5z"/>', { fill: true }),
+  mail: svg('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>'),
+  tiktok: svg('<path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>', { fill: true }),
   google: '<svg class="icon icon-google" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.1 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.8 3.6-4.9 6.7-4.9z"/></svg>',
   whatsapp: svg('<path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35m-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.82 9.82 0 0 1 6.99 2.9 9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.33 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41"/>', { fill: true }),
 };
@@ -109,6 +112,7 @@ const ICON_RULES = [
 ];
 const iconFor = (text) => icon[(ICON_RULES.find(([re]) => re.test(text)) || [null, 'shieldCheck'])[1]];
 const COVERAGE_ICONS = { auto: 'car', commercial: 'truck', property: 'home' };
+const CHANNEL_ICONS = { call: 'phone', whatsapp: 'whatsapp', email: 'mail' };
 const WHY_ICONS = ['shieldCheck', 'languages', 'car', 'pin'];
 
 // ---------- Piezas compartidas ----------
@@ -296,6 +300,7 @@ function footer(c, key) {
         <ul>
           <li><a href="${site.maps}" ${ext}>${a.street}<br>${a.city}, ${a.region} ${a.zip}</a></li>
           <li><a href="tel:${site.phone.tel}">${site.phone.display}</a></li>
+          <li><a href="${wa(c.ui.waDefault)}" ${ext}>${f.whatsapp}: ${site.whatsappDisplay}</a></li>
           <li><a href="mailto:${site.email}">${site.email}</a></li>
           ${c.ui.hours.map(([d, h]) => `<li>${d}: ${h}</li>`).join('\n          ')}
           <li><a href="${site.calendly}" ${ext}>${c.ui.booking}</a></li>
@@ -306,13 +311,17 @@ function footer(c, key) {
         <ul>
           <li><a class="footer-social" href="${site.social.instagram}" ${ext}>${icon.instagram}<span>Instagram</span></a></li>
           <li><a class="footer-social" href="${site.social.facebook}" ${ext}>${icon.facebook}<span>Facebook</span></a></li>
+          ${site.social.tiktok ? `<li><a class="footer-social" href="${site.social.tiktok}" ${ext}>${icon.tiktok}<span>TikTok</span></a></li>` : ''}
         </ul>
       </div>
     </div>
     <p class="footer-legal">${f.legal}</p>
     <div class="footer-bottom">
       <span>© <span data-year>${new Date().getFullYear()}</span> ${site.name} ${f.rights}</span>
-      <a href="${other.routes[key] || other.routes.home}" hreflang="${other.lang}" lang="${other.lang}">${c.ui.switchTo}</a>
+      <span class="footer-links">
+        <a href="${c.routes.terms}">${f.terms}</a>
+        <a href="${other.routes[key] || other.routes.home}" hreflang="${other.lang}" lang="${other.lang}">${c.ui.switchTo}</a>
+      </span>
     </div>
   </div>
 </footer>`;
@@ -430,10 +439,19 @@ function homePage(c) {
   const r = c.routes;
   const ig = site.instagram;
 
-  const stats = `
-<section class="stats-strip" aria-label="${esc(c.about.intro.label)}">
-  <div class="container">
-    ${statsList(c.about.intro.stats)}
+  // Logos de aseguradoras justo debajo de la portada, en dos filas que se desplazan en sentidos
+  // opuestos (cada lista va duplicada para que el movimiento sea continuo; la copia se oculta a
+  // lectores de pantalla). Sin loading="lazy": los logos que entran deslizándose quedaban vacíos.
+  const half = Math.ceil(site.carriers.length / 2);
+  const logo = (ca) => `<li class="logo-item" title="${esc(ca.name)}"><img src="/assets/img/carriers/${ca.logo}" alt="${esc(ca.name)}" decoding="async"${ca.zoom ? ` style="--zoom:${ca.zoom}"` : ''}></li>`;
+  const carriers = `
+<section class="logos-strip" id="${ids.carriers}" aria-label="${esc(h.carriers.heading)}">
+  <div class="container"><p class="logos-title">${h.carriers.heading}</p></div>
+  <div class="marquee">
+    ${[site.carriers.slice(0, half), site.carriers.slice(half)].map((row, i) => `<div class="marquee-row${i ? ' marquee-row--reverse' : ''}">
+      <ul class="marquee-track">${row.map(logo).join('')}</ul>
+      <ul class="marquee-track" aria-hidden="true">${row.map(logo).join('')}</ul>
+    </div>`).join('\n    ')}
   </div>
 </section>`;
 
@@ -484,14 +502,6 @@ function homePage(c) {
   </div>
 </section>`;
 
-  const sr22 = photoBand({
-    photoId: site.photos.sr22,
-    label: h.sr22.label,
-    heading: h.sr22.heading,
-    text: h.sr22.text,
-    buttons: `<a class="btn btn-solid" href="${wa(h.sr22.wa)}" ${ext}>${icon.whatsapp}<span>${c.ui.whatsapp}</span></a>
-        <a class="btn btn-outline" href="${r.auto}#${c.auto.sr22.id}">${h.sr22.more} ${icon.arrow}</a>`,
-  });
 
   const steps = `
 <section class="section" id="${ids.steps}">
@@ -520,25 +530,22 @@ function homePage(c) {
 </section>`;
 
   const reviews = `
-<section class="section" id="${ids.reviews}">
+<section class="section section--compact" id="${ids.reviews}">
   <div class="container">
     ${head(5, h.reviews.label)}
-    <div class="split split--reviews">
-      <div class="split-aside rating-card reveal">
-        <p class="rating-source">${icon.google}<span>Google</span></p>
-        <p class="big-number" data-count="${site.rating.value}">${site.rating.value}</p>
-        <p class="stars" role="img" aria-label="${site.rating.value} / 5">★★★★★</p>
-        <p class="rating-count">${h.reviews.count}</p>
-        <div class="rating-links">
-          <a class="btn btn-solid" href="${google.write}" ${ext}>${h.reviews.write}</a>
-          <a class="link-arrow" href="${google.reviews}" ${ext}>${h.reviews.link} ${icon.external}</a>
-        </div>
+    <div class="reviews-head">
+      <h2 class="section-heading reveal">${h.reviews.heading}</h2>
+      <div class="rating-pill reveal">
+        ${icon.google}<span class="rating-pill-score">${site.rating.value}</span><span class="stars" role="img" aria-label="${site.rating.value} / 5">★★★★★</span><span class="rating-pill-count">${h.reviews.count}</span>
+        <a class="btn btn-solid btn-sm" href="${google.write}" ${ext}>${h.reviews.write}</a>
+        <a class="link-arrow" href="${google.reviews}" ${ext}>${h.reviews.link} ${icon.external}</a>
       </div>
+    </div>
+    ${h.reviews.note ? `<p class="review-note reveal">${h.reviews.note}</p>` : ''}
+    <div>
       <div>
-        <h2 class="section-heading reveal">${h.reviews.heading}</h2>
-        ${h.reviews.note ? `<p class="review-note reveal">${h.reviews.note}</p>` : ''}
         <ul class="review-grid">
-          ${h.reviews.items.map((rv) => `<li class="review-card spotlight reveal">
+          ${h.reviews.items.slice(0, 4).map((rv) => `<li class="review-card spotlight reveal">
             <div class="review-top"><span class="stars" role="img" aria-label="5 / 5">★★★★★</span>${icon.google}</div>
             <blockquote><p>${rv.text}</p></blockquote>
             <p class="review-author"><span class="avatar" aria-hidden="true">${initials(rv.by)}</span><span><span class="review-by">${rv.by}</span><span class="review-source">${h.reviews.source}</span></span></p>
@@ -569,29 +576,10 @@ function homePage(c) {
   </div>
 </section>`;
 
-  // Aseguradoras en dos filas que se desplazan en sentidos opuestos (cada lista va
-  // duplicada para que el movimiento sea continuo; la copia se oculta a lectores de pantalla).
-  const half = Math.ceil(site.carriers.length / 2);
-  // Sin loading="lazy": el navegador no detecta los logos que entran deslizándose y quedaban vacíos.
-  const logo = (ca) => `<li class="logo-item" title="${esc(ca.name)}"><img src="/assets/img/carriers/${ca.logo}" alt="${esc(ca.name)}" decoding="async"${ca.zoom ? ` style="--zoom:${ca.zoom}"` : ''}></li>`;
-  const carriers = `
-<section class="section section--compact" id="${ids.carriers}">
-  <div class="container">
-    ${head(7, h.carriers.label)}
-    <h2 class="section-heading reveal">${h.carriers.heading}</h2>
-  </div>
-  <div class="marquee reveal">
-    ${[site.carriers.slice(0, half), site.carriers.slice(half)].map((row, i) => `<div class="marquee-row${i ? ' marquee-row--reverse' : ''}">
-      <ul class="marquee-track">${row.map(logo).join('')}</ul>
-      <ul class="marquee-track" aria-hidden="true">${row.map(logo).join('')}</ul>
-    </div>`).join('\n    ')}
-  </div>
-</section>`;
-
-  const contact = contactSection(c, 8, ids.contact);
+  const contact = contactSection(c, 7, ids.contact);
 
   return hero(c, h.hero, { waText: c.ui.waDefault, photoId: site.photos.hero, isHome: true })
-    + stats + coverages + why + sr22 + steps + about + reviews + instagram + carriers + contact;
+    + carriers + coverages + why + steps + about + reviews + instagram + contact;
 }
 
 // Contacto: formulario que arma un mensaje de WhatsApp + mapa + datos de la oficina.
@@ -605,7 +593,7 @@ function contactSection(c, n, id) {
     ${head(n, c.home.contact.label)}
     <h2 class="section-heading reveal">${c.home.contact.heading}</h2>
     <div class="contact-layout">
-      <form class="contact-form reveal" data-wa-form data-wa="${site.whatsapp}" data-msg="${msg}" novalidate>
+      <form class="contact-form reveal" data-wa-form data-wa="${site.whatsapp}" data-email="${site.email}" data-subject="${esc(f.emailSubject)}" data-msg="${msg}" novalidate>
         ${eyebrow(f.label)}
         <h3 class="form-heading">${f.heading}</h3>
         <div class="field">
@@ -629,7 +617,7 @@ function contactSection(c, n, id) {
         <fieldset class="field">
           <legend>${f.pref}</legend>
           <div class="choice-row">
-            ${f.prefOptions.map((o, i) => `<label class="choice"><input type="radio" name="pref" value="${esc(o)}"${i === 0 ? ' checked' : ''}><span>${o}</span></label>`).join('\n            ')}
+            ${f.prefOptions.map((o, i) => `<label class="choice"><input type="radio" name="pref" value="${esc(o)}" data-channel="${f.actions[i].channel}" data-submit="${esc(f.actions[i].submit)}" data-note="${esc(f.actions[i].note)}"${i === 0 ? ' checked' : ''}><span>${o}</span></label>`).join('\n            ')}
           </div>
         </fieldset>
         <div class="field">
@@ -637,8 +625,8 @@ function contactSection(c, n, id) {
           <textarea id="cf-message" name="message" rows="4" placeholder="${esc(f.messagePlaceholder)}"></textarea>
         </div>
         <p class="form-error" role="alert" hidden>${f.required}</p>
-        <button class="btn btn-solid" type="submit">${icon.whatsapp}<span>${f.submit}</span></button>
-        <p class="form-note">${f.note}</p>
+        <button class="btn btn-solid" type="submit">${Object.entries(CHANNEL_ICONS).map(([ch, ic]) => `<span class="btn-icon${ch === f.actions[0].channel ? '' : ' is-hidden'}" data-channel-icon="${ch}">${icon[ic]}</span>`).join('')}<span data-submit-label>${f.actions[0].submit}</span></button>
+        <p class="form-note" data-note>${f.actions[0].note}</p>
       </form>
       <div class="contact-side reveal">
         <div class="map">
@@ -654,7 +642,7 @@ function contactSection(c, n, id) {
           <div class="contact-item">
             <dt>${c.ui.labels.phone}</dt>
             <dd><a href="tel:${site.phone.tel}">${site.phone.display}</a><a class="contact-sub" href="mailto:${site.email}">${site.email}</a>
-              <span class="contact-links"><a class="link-arrow" href="${wa(c.ui.waDefault)}" ${ext}>${icon.whatsapp} WhatsApp</a><a class="link-arrow" href="${site.calendly}" ${ext}>${icon.calendar} ${c.ui.booking}</a></span></dd>
+              <span class="contact-links"><a class="link-arrow" href="${wa(c.ui.waDefault)}" ${ext}>${icon.whatsapp} WhatsApp ${site.whatsappDisplay}</a><a class="link-arrow" href="${site.calendly}" ${ext}>${icon.calendar} ${c.ui.booking}</a></span></dd>
           </div>
           <div class="contact-item">
             <dt>${c.ui.labels.hours}</dt>
@@ -811,7 +799,8 @@ function aboutPage(c) {
         <h2 class="feature-heading">${maria.name}</h2>
         ${m.bio.map((t) => `<p>${t}</p>`).join('')}
         <figure class="quote"><blockquote>“${m.quote}”</blockquote><figcaption>${maria.name}</figcaption></figure>
-        <a class="btn btn-solid" href="${wa(m.wa)}" ${ext}>${icon.whatsapp}<span>${m.cta}</span></a>
+        <p class="direct-line">${icon.whatsapp}<span>${m.direct}: <a href="${waTo(maria.whatsapp, m.wa)}" ${ext}>${maria.whatsappDisplay}</a></span></p>
+        <a class="btn btn-solid" href="${waTo(maria.whatsapp, m.wa)}" ${ext}>${icon.whatsapp}<span>${m.cta}</span></a>
       </div>
     </div>
   </div>
@@ -825,14 +814,20 @@ function aboutPage(c) {
     <h2 class="section-heading reveal">${t.heading}</h2>
     ${groupPhoto(c, t.groupCaption)}
     <ul class="team-grid">
-      ${site.team.map((mem) => {
+      ${site.team.filter((mem) => mem.id !== 'maria').map((mem) => {
         const info = t.members[mem.id] || {};
+        const [first, ...rest] = info.bio || [];
         return `<li class="team-card spotlight reveal">
         ${portrait(c, mem.name, mem.photo, 'portrait')}
         <div class="team-body">
           <h3 class="team-name">${mem.name}</h3>
           <p class="team-role">${info.role || c.ui.profileSoon}</p>
-          ${info.text ? `<p class="team-text">${info.text}</p>` : ''}
+          ${first ? `<p class="team-text">${first}</p>` : ''}
+          ${rest.length || info.closing ? `<details class="team-more">
+            <summary><span class="more">${t.readMore}</span><span class="less">${t.readLess}</span></summary>
+            ${rest.map((x) => `<p class="team-text">${x}</p>`).join('')}
+            ${info.closing ? `<p class="team-closing">${info.closing}</p>` : ''}
+          </details>` : ''}
         </div>
       </li>`;
       }).join('\n      ')}
@@ -842,6 +837,36 @@ function aboutPage(c) {
 
   return hero(c, p.hero, { waText: p.hero.wa, lines: p.hero.lines, photoId: site.photos.about })
     + intro + mariaSection + team + ctaBand(c, p.hero.wa);
+}
+
+function termsPage(c) {
+  const p = c.terms;
+  const a = site.address;
+  return `
+<section class="section legal-hero">
+  ${orbs}
+  <div class="container">
+    ${eyebrow(p.label, ' reveal')}
+    <h1 class="hero-title reveal" id="hero-title">${p.title}</h1>
+    <p class="legal-updated reveal">${p.updated}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container legal">
+    ${p.intro.map((t) => `<p>${t}</p>`).join('')}
+    ${p.sections.map((sec) => `<section class="legal-section">
+      <h2>${sec.title}</h2>
+      ${sec.body.map((t) => `<p>${t}</p>`).join('')}
+      ${sec.list ? `<ul>${sec.list.map((li) => `<li>${li}</li>`).join('')}</ul>` : ''}
+      ${(sec.after || []).map((t) => `<p>${t}</p>`).join('')}
+      ${sec.contact ? `<address class="legal-contact">${site.name}<br>${a.street}<br>${a.city}, ${a.region} ${a.zip}<br><a href="tel:${site.phone.tel}">${site.phone.display}</a><br><a href="mailto:${site.email}">${site.email}</a></address>` : ''}
+    </section>`).join('\n    ')}
+    <div class="legal-commitment">
+      <h2>${p.commitment.title}</h2>
+      ${p.commitment.body.map((t) => `<p>${t}</p>`).join('')}
+    </div>
+  </div>
+</section>`;
 }
 
 function notFoundPage() {
@@ -887,7 +912,9 @@ function faqJson(c) {
     .replace(/\{commercial\}/g, c.routes.commercial)
     .replace(/\{property\}/g, c.routes.property)
     .replace(/\{about\}/g, c.routes.about)
-    .replace(/\{calendly\}/g, site.calendly);
+    .replace(/\{calendly\}/g, site.calendly)
+    .replace(/\{waPhone\}/g, site.whatsappDisplay)
+    .replace(/\{wa\}/g, `https://wa.me/${site.whatsapp}`);
   return JSON.stringify({
     lang: c.lang,
     whatsapp: site.whatsapp,
@@ -911,7 +938,7 @@ function favicon() {
 }
 
 function sitemap() {
-  const keys = ['home', 'auto', 'commercial', 'property', 'about'];
+  const keys = ['home', 'auto', 'commercial', 'property', 'about', 'terms'];
   const urls = [];
   for (const lang of Object.keys(LANGS)) {
     for (const k of keys) {
@@ -949,6 +976,7 @@ for (const c of Object.values(LANGS)) {
     commercial: groupsPage(c, 'commercial'),
     property: groupsPage(c, 'property'),
     about: aboutPage(c),
+    terms: termsPage(c),
   };
   for (const [key, body] of Object.entries(pages)) {
     write(path.join(c.routes[key], 'index.html'), layout(c, key, body));

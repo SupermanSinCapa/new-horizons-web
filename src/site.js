@@ -4,8 +4,9 @@ module.exports = {
   name: 'New Horizons Insurance Inc.',
   url: 'https://newhorizonsinsurances.com',
   phone: { display: '(813) 644-6120', tel: '+18136446120' },
-  // Número de WhatsApp en formato internacional, sin "+" ni espacios.
-  whatsapp: '18136446120',
+  // Número de WhatsApp de la oficina en formato internacional, sin "+" ni espacios.
+  whatsapp: '17272828161',
+  whatsappDisplay: '(727) 282-8161',
   email: 'info@newhorizonsinsurance.com',
   address: {
     street: '7730 Palm River Rd, Suite 200',
@@ -22,6 +23,8 @@ module.exports = {
   social: {
     instagram: 'https://www.instagram.com/newhorizonsins/',
     facebook: 'https://www.facebook.com/share/17ZbBnvT87/',
+    // Pendiente: pegar aquí el enlace de TikTok (vacío = no se muestra).
+    tiktok: '',
   },
   // Actualizar a mano cuando cambie la ficha de Google.
   rating: { value: '4.9', count: 263 },
@@ -77,10 +80,12 @@ module.exports = {
   ],
   // Equipo. Fotos en assets/img/team/ con el nombre de `photo`; si la foto no
   // existe, se muestra un espacio con las iniciales. Textos en content/*.js.
+  // María tiene su propia sección; las tarjetas del equipo muestran a los demás.
   team: [
-    { id: 'maria', name: 'María González', photo: 'maria-gonzalez.jpg' },
-    { id: 'michel', name: 'Michel', photo: 'michel.jpg' },
-    { id: 'nory', name: 'Nory', photo: 'nory.jpg' },
+    { id: 'maria', name: 'María González', photo: 'maria-gonzalez.jpg', whatsapp: '18134083770', whatsappDisplay: '(813) 408-3770' },
+    { id: 'nory', name: 'Norelvys Rodríguez', photo: 'nory.jpg' },
+    { id: 'michel', name: 'Michel Arteaga', photo: 'michel.jpg' },
+    { id: 'aaron', name: 'Aaron Gonzalez', photo: 'aaron.jpg' },
   ],
   groupPhoto: 'equipo.jpg',
   // Fotos gratuitas de Unsplash (licencia libre para uso comercial): id de cada foto.

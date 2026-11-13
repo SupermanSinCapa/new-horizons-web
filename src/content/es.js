@@ -9,6 +9,7 @@ module.exports = {
     commercial: '/seguro-comercial/',
     property: '/seguro-de-hogar/',
     about: '/nosotros/',
+    terms: '/terminos-y-condiciones/',
   },
 
   ui: {
@@ -34,7 +35,7 @@ module.exports = {
     mapTitle: 'Mapa de la oficina de New Horizons Insurance en Tampa',
     booking: 'Agendar una cita en línea',
     photoSoon: 'Foto próximamente',
-    rotator: { before: 'Seguros de', words: ['auto', 'camiones', 'negocios', 'hogar', 'SR-22'], after: 'en Tampa, Florida.' },
+    rotator: { before: 'Seguros de', words: ['auto', 'camiones', 'negocios', 'hogar'], after: 'en Tampa, Florida.' },
     quick: { title: 'Cotiza en minutos', text: 'Elige qué quieres asegurar y te respondemos por WhatsApp.' },
     recommended: 'Más completo',
     profileSoon: 'Perfil próximamente',
@@ -45,13 +46,18 @@ module.exports = {
       phone: 'Teléfono',
       email: 'Correo electrónico (opcional)',
       type: 'Tipo de seguro',
-      typeOptions: ['Seguro de auto', 'SR-22 / FR-44', 'Seguro comercial / negocio', 'Camiones y transporte', 'Seguro de hogar', 'Seguro de inquilino (renters)', 'Seguro de inundación', 'Otro'],
+      typeOptions: ['Seguro de auto', 'Seguro comercial / negocio', 'Camiones y transporte', 'Seguro de hogar', 'Seguro de inquilino (renters)', 'Seguro de inundación', 'Otro'],
       pref: '¿Cómo prefieres que te contactemos?',
       prefOptions: ['Llamada', 'WhatsApp', 'Correo'],
       message: 'Mensaje (opcional)',
       messagePlaceholder: 'Cuéntanos qué necesitas asegurar o tu pregunta…',
-      submit: 'Enviar por WhatsApp',
-      note: 'Al enviar se abre WhatsApp con tu mensaje listo para la oficina. Este sitio no guarda tus datos.',
+      // Botón y nota según cómo prefiere que lo contacten (mismo orden que prefOptions).
+      actions: [
+        { channel: 'call', submit: 'Solicitar llamada', note: 'Al enviar se abre WhatsApp con tu solicitud y la oficina te llamará al número que dejaste. Este sitio no guarda tus datos.' },
+        { channel: 'whatsapp', submit: 'Enviar por WhatsApp', note: 'Al enviar se abre WhatsApp con tu mensaje listo para la oficina. Este sitio no guarda tus datos.' },
+        { channel: 'email', submit: 'Enviar por correo', note: 'Al enviar se abre tu aplicación de correo con el mensaje listo para la oficina. Este sitio no guarda tus datos.' },
+      ],
+      emailSubject: 'Solicitud de cotización',
       required: 'Escribe tu nombre y tu teléfono para poder contactarte.',
       // Plantilla del mensaje que llega por WhatsApp.
       msg: { hello: 'Hola, soy {name}.', type: 'Me interesa: {type}.', phone: 'Teléfono: {phone}', email: 'Correo: {email}', pref: 'Prefiero que me contacten por: {pref}' },
@@ -68,25 +74,27 @@ module.exports = {
       follow: 'Síguenos',
       legal: 'La información de este sitio es general y no reemplaza los términos de tu póliza. Las coberturas, límites y requisitos dependen de cada aseguradora y de las leyes de Florida.',
       rights: 'Todos los derechos reservados.',
+      terms: 'Términos y condiciones',
+      whatsapp: 'WhatsApp',
     },
   },
 
   home: {
     meta: {
       title: 'New Horizons Insurance | Seguros de auto, comerciales y de hogar en Tampa',
-      description: 'Agencia independiente de seguros en Tampa, FL. Comparamos más de 30 aseguradoras para tu seguro de auto, SR-22, comercial, camiones y hogar. Atención en español e inglés.',
+      description: 'Agencia independiente de seguros en Tampa, FL, con más de 10 años de experiencia. Seguros de auto, comerciales, camiones y hogar. Atención en español e inglés.',
     },
     hero: {
       label: 'Agencia independiente de seguros — Tampa, Florida',
       title: 'Tu tranquilidad es nuestra prioridad.',
       highlight: 'nuestra prioridad.',
-      sub: 'Expertos en seguros de autos, camiones comerciales y hogar en Tampa. Comparamos las mejores compañías del país para darte la cobertura que cumple con la ley y que de verdad te protege.',
+      sub: 'Somos una agencia independiente en Tampa con más de 10 años de experiencia en seguros personales y comerciales.',
       manifesto: '“Protegemos tu futuro y el de tu negocio.”',
       meta: [['Oficina', 'Tampa, Florida'], ['Google', '4.9 ★ · 263 reseñas'], ['Idiomas', 'Español · English']],
     },
     coverages: {
       label: 'Coberturas',
-      heading: 'Coberturas para todo lo que importa. Comparamos entre <em>más de 30 aseguradoras</em> para darte la mejor protección al mejor precio.',
+      heading: 'Trabajamos con distintas compañías para ofrecer opciones y precios competitivos, damos seguimiento a las renovaciones y construimos <em>relaciones de confianza a largo plazo.</em>',
       items: {
         auto: {
           kicker: 'Personal',
@@ -115,7 +123,7 @@ module.exports = {
       items: [
         { title: 'Agencia independiente', tag: 'Trabajamos para ti', text: 'No dependemos de una sola compañía. Comparamos entre las mejores aseguradoras y te recomendamos la opción que de verdad te conviene.' },
         { title: 'Atención bilingüe', tag: 'Español · English', text: 'Asesoría clara en tu idioma, sin complicaciones. Te explicamos qué cubre tu póliza antes de firmar.' },
-        { title: 'Para todo tipo de conductor', tag: 'Alto riesgo · SR-22 · FR-44', text: 'Te ayudamos a encontrar una póliza aunque otras aseguradoras te la hayan negado, sin importar tu historial de manejo.' },
+        { title: 'Para todo tipo de conductor', tag: 'Alto riesgo · Cualquier historial', text: 'Te ayudamos a encontrar una póliza aunque otras aseguradoras te la hayan negado, sin importar tu historial de manejo.' },
         { title: 'Tu agente local', tag: 'Palm River Rd · Tampa', text: 'No solo vendemos coberturas, construimos relaciones. Visítanos en nuestra oficina o resuélvelo todo por teléfono o WhatsApp.' },
       ],
       quote: { text: 'Protegemos tu futuro y el de tu negocio.', by: 'María González', role: 'Agente de seguros' },
@@ -236,7 +244,6 @@ module.exports = {
         { title: 'Estándar y Preferencial', tag: 'Conductor de todos los días', text: 'Si tienes un historial de manejo limpio, te conectamos con tarifas preferenciales (más bajas) y coberturas completas para tu vehículo de uso diario.' },
         { title: 'Alto Riesgo', tag: 'High-Risk', text: 'Cobertura para conductores con multas, accidentes, licencia suspendida, poca experiencia manejando o una condena por DUI. Te ayudamos a encontrar una póliza aunque otras aseguradoras te la hayan negado.' },
         { title: 'Autos Clásicos y de Alto Valor', tag: 'Valor acordado', text: 'Tú y la aseguradora fijan desde el inicio cuánto vale tu carro. Así, si hay una pérdida, recibes ese valor y no el valor depreciado del mercado.' },
-        { title: 'Vehículos Recreativos y Embarcaciones', tag: 'RV · Motos · Botes · Jet Ski', text: 'Aseguramos tu motorhome (RV), casa rodante, motocicleta, bote o moto de agua para que disfrutes tus fines de semana y vacaciones con total tranquilidad.' },
         { title: 'Programas para Conductores Mayores', tag: 'Tercera edad', text: 'Programas pensados para conductores de la tercera edad, con tarifas ajustadas y beneficios para quienes manejan menos millas al año.' },
       ],
     },
@@ -374,6 +381,7 @@ module.exports = {
       ],
       quote: 'Protegemos tu futuro y el de tu negocio.',
       cta: 'Hablar con María',
+      direct: 'WhatsApp directo de María',
       wa: 'Hola María, me gustaría cotizar un seguro.',
     },
     team: {
@@ -382,11 +390,139 @@ module.exports = {
       heading: 'Las personas detrás de tu póliza.',
       groupCaption: 'El equipo de New Horizons Insurance en nuestra oficina de Tampa.',
       // Rol y descripción de cada integrante (mismo `id` que en site.js).
+      readMore: 'Leer más',
+      readLess: 'Ver menos',
+      // Presentación de cada integrante (mismo id que en site.js).
       members: {
-        maria: { role: 'Agente de seguros', text: 'Asesora a familias y negocios en seguros de auto, comerciales y de hogar.' },
-        michel: { role: '', text: '' },
-        nory: { role: '', text: '' },
+        nory: {
+          role: 'Directora de Seguros de Vivienda',
+          bio: [
+            'Como parte del equipo de New Horizons Insurance, Nory se especializa en seguros de vivienda y cuenta con amplia experiencia en cotizaciones, emisión de pólizas, renovaciones y requisitos de las compañías aseguradoras.',
+            'Trabaja estrechamente con agentes de bienes raíces y prestamistas hipotecarios en toda Florida, ayudando a los propietarios a encontrar coberturas competitivas y aprovechar posibles descuentos mediante inspecciones como Wind Mitigation y otras evaluaciones de la propiedad.',
+            'Con acceso a aproximadamente 25 compañías aseguradoras especializadas en propiedades e inundaciones, Nory compara diferentes opciones para encontrar la cobertura que mejor se adapte a las necesidades de cada cliente.',
+            'Además, mantiene relaciones profesionales con inspectores, plomeros y electricistas para ayudar a los clientes a cumplir con los requisitos de sus aseguradoras.',
+            'También asesora a los clientes sobre oportunidades de ahorro al combinar los seguros de vivienda y automóvil a través de nuestra agencia.',
+            'Uno de los beneficios de trabajar con Nory es su servicio personalizado de revisión anual de pólizas. Cada año evalúa las coberturas, revisa las renovaciones y busca alternativas que puedan ofrecer mejores condiciones y oportunidades de ahorro.',
+            'Su filosofía es sencilla: proteger aquello que tanto esfuerzo les ha costado construir a nuestros clientes, procurando mantener sus seguros a precios accesibles.',
+          ],
+          closing: 'Porque tu hogar merece protección y tu bolsillo también merece un descanso.',
+        },
+        michel: {
+          role: 'Directora de Seguros Comerciales',
+          bio: [
+            'Con más de cinco años de experiencia en la industria de seguros, Michel Arteaga es una profesional comprometida y altamente capacitada, con amplios conocimientos en seguros personales y comerciales, especializada en seguros para negocios.',
+            'Desde pequeñas empresas hasta grandes operaciones comerciales, Michel cuenta con experiencia atendiendo diversas necesidades de seguros en sectores como la construcción, la hotelería, el comercio y muchas otras industrias.',
+            'Reconocida por su dedicación, atención a los detalles y conocimientos de la industria, Michel se esfuerza por encontrar soluciones de cobertura adaptadas a las necesidades particulares de cada cliente. Su prioridad es construir relaciones duraderas y ofrecer un servicio excepcional.',
+            'Michel cree que ningún cliente es demasiado grande ni demasiado pequeño. Todos merecen la misma dedicación, experiencia y atención personalizada.',
+            'Ya sea que estés comenzando un negocio, ampliando tus operaciones o buscando mejores opciones de seguros, Michel está preparada para ayudarte a encontrar la protección adecuada.',
+          ],
+          closing: 'Comunícate con Michel y descubre la diferencia de contar con una profesional comprometida con tus necesidades.',
+        },
+        aaron: {
+          role: 'Agente de Seguros',
+          bio: [
+            'Como parte del equipo de New Horizons Insurance, Aaron se especializa en ayudar a personas y familias a encontrar, administrar y mantener seguros de automóviles personales y comerciales que se adapten a sus necesidades y presupuestos.',
+            'Aaron acompaña a sus clientes durante todo el proceso, desde obtener nuevas cotizaciones hasta administrar sus pólizas existentes.',
+            'Sus servicios incluyen agregar o eliminar conductores y vehículos, modificar coberturas, actualizar información, revisar el estado de los pagos y explorar nuevas opciones de protección.',
+            'Con experiencia en coberturas de responsabilidad civil, colisión, cobertura comprensiva y otras protecciones para automóviles, Aaron dedica tiempo a explicar las diferentes opciones para que sus clientes puedan tomar decisiones informadas.',
+            'En seguros de automóviles comerciales, trabaja directamente con propietarios de negocios para encontrar opciones competitivas que respondan a las necesidades de sus vehículos y operaciones.',
+            'Su objetivo es hacer que el proceso de obtener y mantener un seguro sea sencillo, conveniente y sin complicaciones, ofreciendo siempre un servicio amable, confiable y personalizado.',
+            'Aaron está comprometido con construir relaciones duraderas, mantener las pólizas de sus clientes actualizadas y ayudarlos a encontrar el equilibrio adecuado entre protección y precio.',
+          ],
+          closing: 'Porque proteger lo que mueve tu vida y tu negocio no debería ser complicado.',
+        },
       },
+    },
+  },
+
+  // Términos y condiciones (texto entregado por la agencia).
+  terms: {
+    meta: {
+      title: 'Términos y condiciones | New Horizons Insurance',
+      description: 'Términos y condiciones de uso del sitio web de New Horizons Insurance Inc., agencia independiente de seguros en Tampa, Florida.',
+    },
+    label: 'Información legal',
+    title: 'Términos y condiciones',
+    updated: 'Última actualización: 6 de noviembre de 2026',
+    intro: [
+      'Bienvenido al sitio web de New Horizons Insurance Inc.',
+      'Al acceder o utilizar nuestro sitio web, aceptas los siguientes Términos y Condiciones. Te recomendamos leerlos cuidadosamente.',
+    ],
+    sections: [
+      { title: '1. Acerca de nuestra agencia', body: [
+        'New Horizons Insurance Inc. es una agencia de seguros independiente que ofrece servicios de seguros personales y comerciales.',
+        'Trabajamos con múltiples compañías aseguradoras para ayudar a personas, familias y negocios a explorar opciones de cobertura que se adapten a sus necesidades.',
+        'Los productos y servicios de seguros están disponibles únicamente en aquellos lugares donde nuestra agencia y sus representantes cuentan con las licencias y autorizaciones correspondientes.',
+      ] },
+      { title: '2. Cotizaciones y cobertura de seguros', body: [
+        'Todas las cotizaciones proporcionadas a través de nuestro sitio web, por teléfono, correo electrónico o cualquier otro medio de comunicación están sujetas a las normas de suscripción de la compañía aseguradora, los requisitos de elegibilidad y su aprobación final.',
+      ], list: [
+        'Enviar una solicitud de cotización no garantiza la aceptación ni la emisión de una póliza.',
+        'Las primas, condiciones y términos cotizados pueden cambiar después de la evaluación de la aseguradora.',
+        'La cobertura no entra en vigor hasta que haya sido formalmente vinculada o emitida por una compañía aseguradora o representante autorizado.',
+        'Las solicitudes enviadas mediante el sitio web, correos electrónicos, mensajes de texto o mensajes de voz no establecen, modifican, renuevan ni cancelan automáticamente ninguna cobertura de seguro.',
+      ], after: [
+        'Los clientes deben recibir confirmación de un representante autorizado antes de considerar efectivo cualquier cambio solicitado en su cobertura.',
+      ] },
+      { title: '3. Términos y condiciones de las pólizas', body: [
+        'Todas las pólizas de seguro están sujetas a los términos, condiciones, exclusiones, deducibles, limitaciones y endosos establecidos por la compañía aseguradora correspondiente.',
+        'La información publicada en nuestro sitio web tiene fines educativos y generales, y no sustituye los términos de la póliza de seguro.',
+        'En caso de existir alguna diferencia entre la información del sitio web y los documentos oficiales de la póliza, prevalecerán los documentos emitidos por la compañía aseguradora.',
+      ] },
+      { title: '4. Responsabilidades del cliente', body: [
+        'Los clientes son responsables de proporcionar información exacta, completa y actualizada al solicitar cotizaciones, presentar solicitudes de seguro o realizar cambios en sus pólizas.',
+        'La omisión de información relevante puede ocasionar ajustes en las primas, restricciones de cobertura, cancelaciones u otras consecuencias permitidas por la ley aplicable y los términos de la póliza.',
+        'Asimismo, los clientes son responsables de revisar los documentos de sus pólizas, cumplir con los requisitos establecidos por sus aseguradoras y efectuar los pagos de las primas dentro de las fechas correspondientes.',
+      ] },
+      { title: '5. Pagos, renovaciones y cancelaciones', body: [
+        'Las primas de seguro, los calendarios de pago, las condiciones de renovación y las disposiciones de cancelación son determinados por la compañía aseguradora correspondiente y, cuando aplique, por la compañía autorizada que financie las primas.',
+        'New Horizons Insurance Inc. no se hace responsable por interrupciones en la cobertura derivadas de falta de pago, incumplimiento de fechas límite o incumplimiento de los requisitos establecidos por la aseguradora, excepto en la medida en que la ley aplicable establezca dicha responsabilidad.',
+        'Realizar un pago o solicitar una renovación no garantiza por sí solo la continuidad o reinstalación de la cobertura.',
+        'Los clientes deben comunicarse directamente con nuestra oficina para solicitar cancelaciones, reinstalaciones o modificaciones de sus pólizas y obtener confirmación de la gestión solicitada.',
+      ] },
+      { title: '6. Información del sitio web', body: [
+        'Nos esforzamos por mantener información precisa y actualizada sobre los productos y servicios de seguros que ofrecemos.',
+        'Sin embargo, las tarifas, la disponibilidad de compañías aseguradoras, los requisitos de suscripción y las opciones de cobertura pueden cambiar sin previo aviso.',
+        'La información publicada en nuestro sitio web no debe considerarse asesoría legal, fiscal ni financiera.',
+      ] },
+      { title: '7. Comunicaciones y privacidad', body: [
+        'Al enviar una solicitud de contacto o cotización, autorizas a New Horizons Insurance Inc. a utilizar la información proporcionada para responder a tu consulta y ayudarte con los servicios de seguros solicitados.',
+        'Dependiendo de tus preferencias de comunicación y de los consentimientos requeridos, podremos comunicarnos contigo mediante llamadas telefónicas, correos electrónicos o mensajes de texto.',
+        'Los mensajes de texto con fines publicitarios, cuando se ofrezcan, estarán sujetos a requisitos de consentimiento independientes.',
+        'Aceptar recibir mensajes publicitarios no es una condición obligatoria para adquirir un seguro.',
+        'La información personal se maneja de conformidad con nuestra Política de Privacidad y las leyes aplicables.',
+      ] },
+      { title: '8. Sitios web de terceros', body: [
+        'Nuestro sitio web puede contener enlaces a páginas de compañías aseguradoras, plataformas de pago y otros sitios web administrados por terceros.',
+        'New Horizons Insurance Inc. no controla el contenido, la seguridad ni las prácticas de privacidad de estos sitios externos y no se responsabiliza por sus operaciones independientes.',
+      ] },
+      { title: '9. Limitación de responsabilidad', body: [
+        'En la medida permitida por la legislación aplicable, New Horizons Insurance Inc. no será responsable por pérdidas derivadas exclusivamente de interrupciones del sitio web, errores técnicos, información general desactualizada o accesos no autorizados que estén fuera de nuestro control razonable.',
+        'Ninguna disposición de estos Términos y Condiciones limita los derechos o recursos legales que no pueden ser renunciados, ni las obligaciones impuestas a los profesionales de seguros debidamente autorizados conforme a la legislación aplicable.',
+      ] },
+      { title: '10. Propiedad intelectual', body: [
+        'Todo el contenido original del sitio web, incluidos textos, logotipos, gráficos y elementos de marca pertenecientes a New Horizons Insurance Inc., está protegido por las leyes de propiedad intelectual aplicables.',
+        'Se prohíbe su reproducción no autorizada o utilización comercial sin autorización previa por escrito.',
+      ] },
+      { title: '11. Modificaciones de los términos', body: [
+        'New Horizons Insurance Inc. se reserva el derecho de actualizar estos Términos y Condiciones cuando sea necesario.',
+        'Cualquier modificación será publicada en esta página, junto con la fecha de actualización correspondiente.',
+        'El uso continuo del sitio web después de la entrada en vigor de los cambios constituirá la aceptación de los términos modificados, en la medida permitida por la ley.',
+      ] },
+      { title: '12. Legislación aplicable', body: [
+        'Estos Términos y Condiciones se rigen por las leyes del estado de Florida, salvo cuando otras leyes aplicables dispongan lo contrario.',
+      ] },
+      { title: '13. Información de contacto', body: [
+        'Para preguntas relacionadas con estos Términos y Condiciones o con nuestros servicios de seguros, comunícate con:',
+      ], contact: true },
+    ],
+    commitment: {
+      title: 'Nuestro compromiso',
+      body: [
+        'En New Horizons Insurance Inc., nuestra misión es ayudar a nuestros clientes a comprender sus opciones de seguros, tomar decisiones informadas y proteger aquello que más valoran.',
+        'Más que vender seguros, creemos en educar, orientar y proteger a nuestra comunidad.',
+        'Porque en New Horizons Insurance, no eres simplemente un cliente: queremos que te sientas parte de nuestra familia.',
+      ],
     },
   },
 
@@ -396,7 +532,7 @@ module.exports = {
     open: '¿Preguntas?',
     title: 'Asistente New Horizons',
     subtitle: 'Respuestas al instante',
-    greeting: '¡Hola! Soy el asistente de New Horizons Insurance. Pregúntame sobre nuestros seguros, el SR-22, horarios o cómo cotizar.',
+    greeting: '¡Hola! Soy el asistente de New Horizons Insurance. Pregúntame sobre nuestros seguros, horarios, citas o cómo cotizar.',
     placeholder: 'Escribe tu pregunta…',
     inputLabel: 'Escribe tu pregunta',
     send: 'Enviar',
@@ -409,11 +545,11 @@ module.exports = {
     hello: '¡Hola! ¿En qué te puedo ayudar? Puedes escribir tu pregunta o elegir un tema.',
     thanks: '¡Con gusto! Si necesitas algo más, aquí estoy.',
     disclaimer: 'Respuestas informativas. Para cotizar o confirmar coberturas, habla con un agente.',
-    topics: ['cotizar', 'sr22', 'minimo', 'comercial', 'inundacion', 'horario'],
+    topics: ['cotizar', 'auto', 'minimo', 'comercial', 'inundacion', 'horario'],
     entries: [
       { id: 'horario', q: '¿Cuál es su horario?', k: ['horario', 'hora', 'abren', 'abierto', 'cierran', 'sabado', 'domingo', 'atienden', 'a que hora'], a: 'Atendemos de <strong>lunes a viernes de 9:00 AM a 5:00 PM</strong> y los <strong>sábados de 9:00 AM a 12:00 PM</strong>. También puedes escribirnos por WhatsApp.' },
       { id: 'direccion', q: '¿Dónde están ubicados?', k: ['direccion', 'donde estan', 'donde queda', 'ubicados', 'ubicacion', 'oficina', 'mapa', 'como llegar', 'palm river', 'visitar'], a: 'Nuestra oficina está en <strong>7730 Palm River Rd, Suite 200, Tampa, FL 33619</strong>. <a href="{maps}" target="_blank" rel="noopener">Ver en Google Maps</a>.' },
-      { id: 'contacto', q: '¿Cómo los contacto?', k: ['telefono', 'numero', 'llamar', 'contacto', 'contactar', 'whatsapp', 'correo', 'email', 'comunicarme', 'hablar con', 'agente'], a: 'Llámanos al <a href="tel:{tel}">{phone}</a> o escríbenos por WhatsApp. También puedes visitarnos en nuestra oficina en Tampa.' },
+      { id: 'contacto', q: '¿Cómo los contacto?', k: ['telefono', 'numero', 'llamar', 'contacto', 'contactar', 'whatsapp', 'correo', 'email', 'comunicarme', 'hablar con', 'agente'], a: 'Llámanos al <a href="tel:{tel}">{phone}</a> o escríbenos por WhatsApp al <a href="{wa}" target="_blank" rel="noopener">{waPhone}</a>. También puedes visitarnos en nuestra oficina en Tampa.' },
       { id: 'idioma', q: '¿Hablan español?', k: ['espanol', 'ingles', 'idioma', 'english', 'bilingue'], a: 'Sí. Somos una agencia bilingüe: te atendemos en <strong>español e inglés</strong>, con explicaciones claras y sin complicaciones.' },
       { id: 'servicios', q: '¿Qué seguros ofrecen?', k: ['que seguros', 'ofrecen', 'servicios', 'tipos de seguro', 'que venden', 'productos', 'que hacen', 'que cubren'], a: 'Trabajamos tres áreas: <a href="{auto}">Seguro de Auto</a> (incluye SR-22, FR-44, alto riesgo y Non-Owner), <a href="{commercial}">Seguro Comercial</a> (negocios, camiones y transporte) y <a href="{property}">Seguro de Hogar y Alquiler</a> (propietarios, inundación, inquilinos y casas móviles).' },
       { id: 'cotizar', q: '¿Cómo puedo cotizar?', k: ['cotizar', 'cotizacion', 'cotizo', 'precio', 'cuanto cuesta', 'cuanto sale', 'cuanto vale', 'costo', 'presupuesto', 'quote', 'tarifa', 'barato', 'economico'], a: 'La cotización es <strong>gratis</strong>. Escríbenos por WhatsApp o llámanos al <a href="tel:{tel}">{phone}</a>: comparamos entre más de 30 aseguradoras y te damos opciones. El precio depende de tu perfil, tu vehículo o propiedad y la cobertura que elijas, por eso un agente te lo confirma.' },
@@ -443,7 +579,7 @@ module.exports = {
       { id: 'umbrella', q: '¿Qué es una póliza paraguas?', k: ['paraguas', 'umbrella', 'limites', 'demandas costosas', 'proteccion extra'], a: 'La <strong>Póliza Paraguas (Umbrella)</strong> cubre esos “huecos” y las demandas costosas que superan los límites de tus pólizas de auto o de hogar. También existe una versión comercial para negocios.' },
       { id: 'moviles', q: '¿Aseguran casas móviles?', k: ['casa movil', 'casas moviles', 'mobile home', 'prefabricada', 'manufactured', 'traila'], a: 'Sí. Las casas móviles y prefabricadas necesitan una protección diferente, y ofrecemos opciones accesibles y especializadas para asegurarlas en Tampa.' },
       { id: 'huracan', q: '¿Qué es el deducible de huracán?', k: ['huracan', 'deducible', 'hurricane', 'tormenta', 'viento'], a: 'Muchas pólizas de hogar en Florida tienen un <strong>deducible separado para huracanes</strong>. Te explicamos el tuyo antes de firmar para que no tengas sorpresas.' },
-      { id: 'equipo', q: '¿Quiénes son ustedes?', k: ['quienes son', 'quien es maria', 'maria', 'equipo', 'nosotros', 'michel', 'nory', 'la duena'], a: 'Somos <strong>New Horizons Insurance Inc.</strong>, una agencia independiente y bilingüe en Tampa. María González y su equipo comparan más de 30 aseguradoras para proteger a tu familia y tu negocio. <a href="{about}">Conoce al equipo</a>.' },
+      { id: 'equipo', q: '¿Quiénes son ustedes?', k: ['quienes son', 'quien es maria', 'maria', 'equipo', 'nosotros', 'michel', 'nory', 'norelvys', 'aaron', 'la duena'], a: 'Somos <strong>New Horizons Insurance Inc.</strong>, una agencia independiente y bilingüe en Tampa con más de 10 años de experiencia. Te atienden <strong>María González</strong> y su equipo: <strong>Nory</strong> (seguros de vivienda), <strong>Michel</strong> (seguros comerciales) y <strong>Aaron</strong> (seguros de auto). <a href="{about}">Conoce al equipo</a>.' },
       { id: 'cita', q: '¿Puedo agendar una cita?', k: ['cita', 'agendar', 'reservar', 'appointment', 'calendly', 'reunion', 'visita'], a: 'Sí. Puedes <a href="{calendly}" target="_blank" rel="noopener">agendar una cita en línea</a>, llamarnos al <a href="tel:{tel}">{phone}</a> o visitarnos en nuestra oficina en horario de atención.' },
       { id: 'reclamo', q: '¿Qué hago si tuve un accidente o necesito hacer un reclamo?', k: ['reclamo', 'claim', 'tuve un accidente', 'me chocaron', 'choque', 'siniestro', 'reportar'], a: 'Si tuviste un accidente o necesitas hacer un reclamo, llámanos al <a href="tel:{tel}">{phone}</a> o escríbenos por WhatsApp y te orientamos paso a paso con tu aseguradora.' },
     ],

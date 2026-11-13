@@ -97,11 +97,22 @@
     }, 2400);
   });
 
-  // Formulario de contacto: arma el mensaje y lo abre en WhatsApp (no se guarda nada en el sitio).
+  // Formulario de contacto: arma el mensaje y lo abre en WhatsApp o en el correo (no se guarda nada en el sitio).
   document.querySelectorAll('[data-wa-form]').forEach((form) => {
     const tpl = JSON.parse(form.dataset.msg);
     const error = form.querySelector('.form-error');
     const fill = (s, data) => s.replace(/\{(\w+)\}/g, (_, k) => data[k]);
+    // El botón, su ícono y la nota cambian según cómo prefiere que lo contacten.
+    const label = form.querySelector('[data-submit-label]');
+    const note = form.querySelector('[data-note]');
+    const chosen = () => form.querySelector('input[name="pref"]:checked');
+    const syncChannel = () => {
+      const opt = chosen();
+      label.textContent = opt.dataset.submit;
+      note.textContent = opt.dataset.note;
+      form.querySelectorAll('[data-channel-icon]').forEach((ic) => ic.classList.toggle('is-hidden', ic.dataset.channelIcon !== opt.dataset.channel));
+    };
+    form.querySelectorAll('input[name="pref"]').forEach((r) => r.addEventListener('change', syncChannel));
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = Object.fromEntries([...new FormData(form)].map(([k, v]) => [k, String(v).trim()]));
@@ -117,7 +128,13 @@
         data.pref && fill(tpl.pref, data),
         data.message && `\n${data.message}`,
       ].filter(Boolean);
-      const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+      const text = lines.join('\n');
+      if (chosen().dataset.channel === 'email') {
+        const subject = `${form.dataset.subject} — ${data.name}`;
+        window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+        return;
+      }
+      const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(text)}`;
       if (!window.open(url, '_blank', 'noopener')) window.location.href = url;
     });
   });

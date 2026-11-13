@@ -8,6 +8,7 @@ module.exports = {
     commercial: '/en/commercial-insurance/',
     property: '/en/home-insurance/',
     about: '/en/about/',
+    terms: '/en/terms-and-conditions/',
   },
 
   ui: {
@@ -33,7 +34,7 @@ module.exports = {
     mapTitle: 'Map of the New Horizons Insurance office in Tampa',
     booking: 'Book an appointment online',
     photoSoon: 'Photo coming soon',
-    rotator: { before: '', words: ['Auto', 'Truck', 'Business', 'Home', 'SR-22'], after: 'insurance in Tampa, Florida.' },
+    rotator: { before: '', words: ['Auto', 'Truck', 'Business', 'Home'], after: 'insurance in Tampa, Florida.' },
     quick: { title: 'Get a quote in minutes', text: 'Choose what you want to insure and we’ll reply on WhatsApp.' },
     recommended: 'Most complete',
     profileSoon: 'Profile coming soon',
@@ -44,13 +45,17 @@ module.exports = {
       phone: 'Phone',
       email: 'Email (optional)',
       type: 'Type of insurance',
-      typeOptions: ['Auto insurance', 'SR-22 / FR-44', 'Commercial / business', 'Trucking & transport', 'Home insurance', 'Renters insurance', 'Flood insurance', 'Other'],
+      typeOptions: ['Auto insurance', 'Commercial / business', 'Trucking & transport', 'Home insurance', 'Renters insurance', 'Flood insurance', 'Other'],
       pref: 'How should we contact you?',
       prefOptions: ['Phone call', 'WhatsApp', 'Email'],
       message: 'Message (optional)',
       messagePlaceholder: 'Tell us what you need to insure or ask your question…',
-      submit: 'Send via WhatsApp',
-      note: 'Sending opens WhatsApp with your message ready for our office. This site does not store your data.',
+      actions: [
+        { channel: 'call', submit: 'Request a call', note: 'Sending opens WhatsApp with your request and our office will call you at the number you entered. This site does not store your data.' },
+        { channel: 'whatsapp', submit: 'Send via WhatsApp', note: 'Sending opens WhatsApp with your message ready for our office. This site does not store your data.' },
+        { channel: 'email', submit: 'Send by email', note: 'Sending opens your email app with the message ready for our office. This site does not store your data.' },
+      ],
+      emailSubject: 'Insurance quote request',
       required: 'Please enter your name and phone number so we can reach you.',
       msg: { hello: 'Hi, my name is {name}.', type: 'I’m interested in: {type}.', phone: 'Phone: {phone}', email: 'Email: {email}', pref: 'Please contact me by: {pref}' },
     },
@@ -66,25 +71,27 @@ module.exports = {
       follow: 'Follow us',
       legal: 'The information on this site is general and does not replace the terms of your policy. Coverage, limits and requirements depend on each insurance company and on Florida law.',
       rights: 'All rights reserved.',
+      terms: 'Terms & Conditions',
+      whatsapp: 'WhatsApp',
     },
   },
 
   home: {
     meta: {
       title: 'New Horizons Insurance | Auto, Commercial & Home Insurance in Tampa',
-      description: 'Independent insurance agency in Tampa, FL. We compare 30+ insurance companies for auto insurance, SR-22, commercial, trucking and home coverage. Service in English and Spanish.',
+      description: 'Independent insurance agency in Tampa, FL, with more than 10 years of experience. Auto, commercial, trucking and home insurance. Service in English and Spanish.',
     },
     hero: {
       label: 'Independent insurance agency — Tampa, Florida',
       title: 'Your peace of mind is our priority.',
       highlight: 'our priority.',
-      sub: 'Auto, commercial truck and home insurance experts in Tampa. We compare top-rated companies to find you coverage that meets the law and truly protects you.',
+      sub: 'We are an independent agency in Tampa with more than 10 years of experience in personal and commercial insurance.',
       manifesto: '“We protect your future and your business.”',
       meta: [['Office', 'Tampa, Florida'], ['Google', '4.9 ★ · 263 reviews'], ['Languages', 'English · Español']],
     },
     coverages: {
       label: 'Coverage',
-      heading: 'Coverage for everything that matters. We compare <em>30+ insurance companies</em> to get you the best protection at the best price.',
+      heading: 'We work with different insurance companies to offer options and competitive prices, follow up on your renewals and build <em>long-term relationships of trust.</em>',
       items: {
         auto: {
           kicker: 'Personal',
@@ -113,7 +120,7 @@ module.exports = {
       items: [
         { title: 'Independent agency', tag: 'We work for you', text: 'We are not tied to a single company. We compare top insurers and recommend the option that truly fits you.' },
         { title: 'Bilingual service', tag: 'English · Español', text: 'Clear advice in your language, without the jargon. We explain what your policy covers before you sign.' },
-        { title: 'For every kind of driver', tag: 'High-risk · SR-22 · FR-44', text: 'We help you find a policy even if other insurers turned you down, whatever your driving record.' },
+        { title: 'For every kind of driver', tag: 'High-risk · Any driving record', text: 'We help you find a policy even if other insurers turned you down, whatever your driving record.' },
         { title: 'Your local agent', tag: 'Palm River Rd · Tampa', text: 'We don’t just sell coverage, we build relationships. Visit our office or handle everything by phone or WhatsApp.' },
       ],
       quote: { text: 'We protect your future and your business.', by: 'María González', role: 'Insurance agent' },
@@ -233,7 +240,6 @@ module.exports = {
         { title: 'Standard & Preferred', tag: 'Everyday drivers', text: 'If you have a clean driving record, we connect you with preferred (lower) rates and full coverage for your daily vehicle.' },
         { title: 'High-Risk', tag: 'Tickets · Accidents · DUI', text: 'Coverage for drivers with tickets, accidents, a suspended license, little driving experience or a DUI conviction. We help you find a policy even if other insurers turned you down.' },
         { title: 'Classic & High-Value Cars', tag: 'Agreed value', text: 'You and the insurer set your car’s value up front. If there is a loss, you receive that amount — not the depreciated market value.' },
-        { title: 'Recreational Vehicles & Boats', tag: 'RV · Motorcycles · Boats · Jet Ski', text: 'We insure your motorhome (RV), travel trailer, motorcycle, boat or jet ski so you can enjoy weekends and vacations with total peace of mind.' },
         { title: 'Senior Driver Programs', tag: 'Seniors', text: 'Programs designed for senior drivers, with adjusted rates and benefits for those who drive fewer miles per year.' },
       ],
     },
@@ -371,6 +377,7 @@ module.exports = {
       ],
       quote: 'We protect your future and your business.',
       cta: 'Talk to María',
+      direct: 'María’s direct WhatsApp',
       wa: 'Hi María, I would like an insurance quote.',
     },
     team: {
@@ -378,11 +385,131 @@ module.exports = {
       label: 'Our team',
       heading: 'The people behind your policy.',
       groupCaption: 'The New Horizons Insurance team at our Tampa office.',
+      readMore: 'Read more',
+      readLess: 'Show less',
       members: {
-        maria: { role: 'Insurance agent', text: 'Advises families and businesses on auto, commercial and home insurance.' },
-        michel: { role: '', text: '' },
-        nory: { role: '', text: '' },
+        nory: {
+          role: 'Homeowners Insurance Specialist',
+          bio: [
+            'As part of the New Horizons Insurance team, Nory specializes in Homeowners Insurance, with extensive experience in quotes, policy issuance, renewals, and underwriting requirements.',
+            'She works closely with Realtors and Lenders throughout Florida, helping homeowners secure competitive coverage and maximize savings through credits such as Wind Mitigation and other property inspections.',
+            'With access to approximately 25 insurance carriers specializing in property and flood insurance, she compares coverage options to find the best fit for each client’s needs. She also maintains professional relationships with inspectors, plumbers, and electricians to help clients meet insurance requirements.',
+            'Additionally, she helps clients explore potential savings by bundling their home and auto insurance through the agency.',
+            'One of the benefits of working with her is personalized annual renewal reviews. She proactively reviews each client’s policies, evaluates coverage, and searches for better options and additional savings opportunities year after year.',
+            'Her philosophy is simple: Protect what clients have worked so hard to build while keeping insurance affordable.',
+          ],
+          closing: 'Because your home deserves protection, and your wallet deserves a break too.',
+        },
+        michel: {
+          role: 'Senior Commercial Lines Account Manager',
+          bio: [
+            'With over five years of experience in the insurance industry, Michel Arteaga is a highly knowledgeable and dedicated insurance professional with expertise across all major personal and commercial lines, specializing in Commercial Insurance.',
+            'From small businesses to large commercial enterprises, Michel has extensive experience handling diverse and complex insurance needs across industries such as construction, hospitality, retail, and more.',
+            'Known for her exceptional work ethic, attention to detail, and in-depth industry knowledge, Michel goes above and beyond to find coverage solutions tailored to each client’s unique needs. She takes pride in building lasting relationships and delivering outstanding service.',
+            'Michel believes no account is too big or too small. Every client deserves the same dedication, expertise, and personalized attention.',
+          ],
+          closing: 'Whether you’re launching a new business, expanding your operations, or looking for better insurance solutions, Michel is ready to put her expertise to work for you. Connect with Michel today and experience the difference of having a dedicated insurance professional on your side.',
+        },
+        aaron: {
+          role: 'Insurance Agent',
+          bio: [
+            'As part of the New Horizons Insurance team, Aaron specializes in helping individuals and families find, manage, and maintain Personal and Commercial Auto Insurance coverage tailored to their needs and budgets.',
+            'He assists clients with everything from obtaining new insurance quotes to managing existing policies, including adding or removing drivers and vehicles, adjusting coverage, updating policy information, reviewing payment status, and exploring additional coverage options.',
+            'With experience in Liability, Collision, Comprehensive, and other auto insurance protections, he takes the time to educate clients about their coverage and help them make informed decisions.',
+            'For Commercial Auto Insurance, Aaron works with business owners to explore competitive coverage options and obtain quotes that meet their company’s vehicle insurance needs.',
+            'His goal is to make the insurance process simple, convenient, and stress-free by providing friendly, reliable, and personalized customer service.',
+            'He is committed to building lasting relationships, keeping clients’ policies up to date, and helping them find coverage that offers the right balance of protection and affordability.',
+          ],
+          closing: 'Because protecting what drives your life and business should never be complicated.',
+        },
       },
+    },
+  },
+
+  // Terms & Conditions (text provided by the agency).
+  terms: {
+    meta: {
+      title: 'Terms & Conditions | New Horizons Insurance',
+      description: 'Terms & Conditions for the website of New Horizons Insurance Inc., an independent insurance agency in Tampa, Florida.',
+    },
+    label: 'Legal information',
+    title: 'Terms & Conditions',
+    updated: 'Last Updated: November 6, 2026',
+    intro: [
+      'Welcome to New Horizons Insurance Inc. By accessing or using our website, you agree to the following Terms & Conditions. Please read them carefully.',
+    ],
+    sections: [
+      { title: '1. About Our Agency', body: [
+        'New Horizons Insurance Inc. is an independent insurance agency providing personal and commercial insurance services. We work with multiple insurance carriers to help individuals, families, and businesses explore coverage options suited to their needs.',
+        'Insurance products and services are available only where our agency and representatives are properly licensed and authorized.',
+      ] },
+      { title: '2. Insurance Quotes and Coverage', body: [
+        'All insurance quotes provided through our website, by telephone, email, or other communication channels are subject to carrier underwriting guidelines, eligibility requirements, and final approval.',
+      ], list: [
+        'Submitting a quote request does not guarantee coverage or acceptance.',
+        'Quoted premiums, terms, and conditions may change after underwriting review.',
+        'Insurance coverage is not effective until properly bound or issued by an authorized insurance carrier or representative.',
+        'Website submissions, emails, text messages, and voicemail messages do not automatically bind, modify, renew, or cancel insurance coverage.',
+      ], after: [
+        'Customers must receive confirmation from an authorized representative before considering any requested coverage change effective.',
+      ] },
+      { title: '3. Policy Terms and Conditions', body: [
+        'All insurance policies are subject to the terms, conditions, exclusions, deductibles, limitations, and endorsements issued by the applicable insurance carrier.',
+        'Information provided on our website is intended for general educational purposes and does not replace the actual insurance policy.',
+        'In the event of any discrepancy, the issued policy documents govern.',
+      ] },
+      { title: '4. Customer Responsibilities', body: [
+        'Customers are responsible for providing accurate, complete, and current information when requesting insurance quotes, submitting applications, or making policy changes.',
+        'Failure to disclose relevant information may result in premium adjustments, coverage restrictions, cancellation, or other consequences permitted by applicable law and policy terms.',
+        'Customers are also responsible for reviewing policy documents, complying with insurer requirements, and making premium payments by their due dates.',
+      ] },
+      { title: '5. Payments, Renewals, and Cancellations', body: [
+        'Insurance premiums, payment schedules, renewal terms, and cancellation provisions are determined by the applicable insurance carrier and any authorized premium finance company.',
+        'New Horizons Insurance Inc. is not responsible for coverage lapses resulting from nonpayment, missed deadlines, or failure to comply with insurer requirements, except to the extent responsibility is imposed by applicable law.',
+        'Submitting a payment or requesting a renewal does not independently guarantee continued or reinstated coverage.',
+        'Customers should contact our office directly to request cancellations, reinstatements, or policy changes and obtain confirmation of the requested action.',
+      ] },
+      { title: '6. Website Information', body: [
+        'We strive to provide accurate and updated information regarding insurance products and services.',
+        'However, insurance rates, carrier availability, underwriting guidelines, and coverage options may change without notice.',
+        'Information published on this website should not be considered legal, tax, or financial advice.',
+      ] },
+      { title: '7. Communication and Privacy', body: [
+        'By submitting a contact or quote request, you authorize New Horizons Insurance Inc. to use the information provided to respond to your inquiry and assist with requested insurance services.',
+        'Depending on your communication preferences and any required consent, we may contact you by telephone, email, or text message.',
+        'Marketing text messages, when offered, are subject to separate consent requirements. Consent to receive marketing messages is not a condition of purchasing insurance.',
+        'Personal information is handled in accordance with our Privacy Policy and applicable law.',
+      ] },
+      { title: '8. Third-Party Websites', body: [
+        'Our website may contain links to insurance carriers, payment platforms, and other third-party websites.',
+        'New Horizons Insurance Inc. does not control the content, security, or privacy practices of these external websites and is not responsible for their independent operations.',
+      ] },
+      { title: '9. Limitation of Liability', body: [
+        'To the extent permitted by applicable law, New Horizons Insurance Inc. is not liable for losses arising solely from website interruptions, technical errors, outdated general website information, or unauthorized access beyond our reasonable control.',
+        'Nothing in these Terms limits any rights or remedies that cannot legally be waived or any duties imposed on licensed insurance professionals under applicable law.',
+      ] },
+      { title: '10. Intellectual Property', body: [
+        'All original website content, including text, logos, graphics, and branding belonging to New Horizons Insurance Inc., is protected by applicable intellectual property laws.',
+        'Unauthorized reproduction or commercial use is prohibited without written permission.',
+      ] },
+      { title: '11. Changes to These Terms', body: [
+        'New Horizons Insurance Inc. reserves the right to update these Terms & Conditions as necessary.',
+        'Any revisions will be posted on this page with an updated revision date.',
+        'Continued use of the website after changes become effective constitutes acceptance of the revised terms to the extent permitted by law.',
+      ] },
+      { title: '12. Governing Law', body: [
+        'These Terms & Conditions are governed by the laws of the State of Florida, except where other applicable laws require otherwise.',
+      ] },
+      { title: '13. Contact Information', body: [
+        'For questions regarding these Terms & Conditions or our insurance services, please contact:',
+      ], contact: true },
+    ],
+    commitment: {
+      title: 'Our Commitment',
+      body: [
+        'At New Horizons Insurance Inc., our mission is to help customers understand their insurance options, make informed decisions, and protect what matters most.',
+        'More than selling insurance, we believe in educating and protecting our community.',
+      ],
     },
   },
 
@@ -390,7 +517,7 @@ module.exports = {
     open: 'Questions?',
     title: 'New Horizons Assistant',
     subtitle: 'Instant answers',
-    greeting: 'Hi! I’m the New Horizons Insurance assistant. Ask me about our coverage, SR-22 filings, office hours or how to get a quote.',
+    greeting: 'Hi! I’m the New Horizons Insurance assistant. Ask me about our coverage, office hours, appointments or how to get a quote.',
     placeholder: 'Type your question…',
     inputLabel: 'Type your question',
     send: 'Send',
@@ -403,11 +530,11 @@ module.exports = {
     hello: 'Hi! How can I help? Type your question or pick a topic.',
     thanks: 'You’re welcome! I’m here if you need anything else.',
     disclaimer: 'Informational answers only. To get a quote or confirm coverage, talk to an agent.',
-    topics: ['quote', 'sr22', 'minimum', 'commercial', 'flood', 'hours'],
+    topics: ['quote', 'auto', 'minimum', 'commercial', 'flood', 'hours'],
     entries: [
       { id: 'hours', q: 'What are your hours?', k: ['hours', 'open', 'close', 'closing', 'saturday', 'sunday', 'what time', 'schedule'], a: 'We are open <strong>Monday to Friday, 9:00 AM – 5:00 PM</strong> and <strong>Saturday, 9:00 AM – 12:00 PM</strong>. You can also message us on WhatsApp.' },
       { id: 'address', q: 'Where are you located?', k: ['address', 'where are you', 'located', 'location', 'office', 'map', 'directions', 'palm river', 'visit'], a: 'Our office is at <strong>7730 Palm River Rd, Suite 200, Tampa, FL 33619</strong>. <a href="{maps}" target="_blank" rel="noopener">Open in Google Maps</a>.' },
-      { id: 'contact', q: 'How do I contact you?', k: ['phone', 'number', 'call', 'contact', 'whatsapp', 'email', 'reach', 'talk to', 'agent'], a: 'Call us at <a href="tel:{tel}">{phone}</a> or message us on WhatsApp. You can also visit our office in Tampa.' },
+      { id: 'contact', q: 'How do I contact you?', k: ['phone', 'number', 'call', 'contact', 'whatsapp', 'email', 'reach', 'talk to', 'agent'], a: 'Call us at <a href="tel:{tel}">{phone}</a> or message us on WhatsApp at <a href="{wa}" target="_blank" rel="noopener">{waPhone}</a>. You can also visit our office in Tampa.' },
       { id: 'language', q: 'Do you speak Spanish?', k: ['spanish', 'english', 'language', 'espanol', 'bilingual'], a: 'Yes. We are a bilingual agency: we serve you in <strong>English and Spanish</strong>, with clear explanations and no jargon.' },
       { id: 'services', q: 'What insurance do you offer?', k: ['what insurance', 'offer', 'services', 'types of insurance', 'what do you sell', 'products', 'what do you do', 'what do you cover'], a: 'We work in three areas: <a href="{auto}">Auto Insurance</a> (including SR-22, FR-44, high-risk and Non-Owner), <a href="{commercial}">Commercial Insurance</a> (business, trucking and transport) and <a href="{property}">Home & Renters Insurance</a> (homeowners, flood, renters and mobile homes).' },
       { id: 'quote', q: 'How do I get a quote?', k: ['quote', 'quotes', 'price', 'how much', 'cost', 'rate', 'cheap', 'affordable', 'estimate', 'premium'], a: 'Quotes are <strong>free</strong>. Message us on WhatsApp or call <a href="tel:{tel}">{phone}</a>: we compare 30+ insurance companies and give you options. Price depends on your profile, your vehicle or property and the coverage you choose, so an agent will confirm it for you.' },
@@ -437,7 +564,7 @@ module.exports = {
       { id: 'umbrella', q: 'What is an umbrella policy?', k: ['umbrella', 'extra liability', 'limits', 'lawsuits', 'extra protection'], a: 'A <strong>Personal Umbrella</strong> policy covers the “gaps” and costly lawsuits that go beyond the limits of your auto or home policies. There is also a commercial version for businesses.' },
       { id: 'mobile', q: 'Do you insure mobile homes?', k: ['mobile home', 'mobile homes', 'manufactured', 'trailer home', 'prefab'], a: 'Yes. Mobile and manufactured homes need different protection, and we offer affordable, specialized options to insure them in Tampa.' },
       { id: 'hurricane', q: 'What is a hurricane deductible?', k: ['hurricane', 'deductible', 'storm', 'wind', 'windstorm'], a: 'Many Florida home policies have a <strong>separate hurricane deductible</strong>. We explain yours before you sign so there are no surprises.' },
-      { id: 'team', q: 'Who are you?', k: ['who are you', 'who is maria', 'maria', 'team', 'about', 'michel', 'nory', 'owner'], a: 'We are <strong>New Horizons Insurance Inc.</strong>, an independent, bilingual agency in Tampa. María González and her team compare 30+ insurance companies to protect your family and business. <a href="{about}">Meet the team</a>.' },
+      { id: 'team', q: 'Who are you?', k: ['who are you', 'who is maria', 'maria', 'team', 'about', 'michel', 'nory', 'norelvys', 'aaron', 'owner'], a: 'We are <strong>New Horizons Insurance Inc.</strong>, an independent, bilingual agency in Tampa with more than 10 years of experience. You’ll work with <strong>María González</strong> and her team: <strong>Nory</strong> (homeowners insurance), <strong>Michel</strong> (commercial insurance) and <strong>Aaron</strong> (auto insurance). <a href="{about}">Meet the team</a>.' },
       { id: 'appointment', q: 'Can I book an appointment?', k: ['appointment', 'book', 'schedule', 'meeting', 'calendly', 'visit'], a: 'Yes. You can <a href="{calendly}" target="_blank" rel="noopener">book an appointment online</a>, call us at <a href="tel:{tel}">{phone}</a> or visit our office during business hours.' },
       { id: 'claim', q: 'What do I do after an accident or to file a claim?', k: ['claim', 'file a claim', 'had an accident', 'accident', 'crash', 'hit me', 'report'], a: 'If you had an accident or need to file a claim, call us at <a href="tel:{tel}">{phone}</a> or message us on WhatsApp and we’ll guide you step by step with your insurance company.' },
     ],

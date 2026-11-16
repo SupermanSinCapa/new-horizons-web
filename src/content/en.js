@@ -177,6 +177,7 @@ module.exports = {
       heading: 'Follow us on Instagram.',
       text: 'Connect with us for tips on protecting what matters most. Posts are in Spanish.',
       follow: 'Follow on Instagram',
+      tiktok: 'María on TikTok',
       frameTitle: 'Latest New Horizons Insurance posts on Instagram',
       types: { reel: 'Reel', post: 'Post' },
     },

@@ -181,6 +181,7 @@ module.exports = {
       heading: 'Síguenos en Instagram.',
       text: 'Conéctate con nosotros y descubre consejos para proteger lo que más importa.',
       follow: 'Seguir en Instagram',
+      tiktok: 'TikTok de María',
       frameTitle: 'Últimas publicaciones de New Horizons Insurance en Instagram',
       types: { reel: 'Reel', post: 'Publicación' },
     },

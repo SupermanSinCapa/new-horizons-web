@@ -23,8 +23,8 @@ module.exports = {
   social: {
     instagram: 'https://www.instagram.com/newhorizonsins/',
     facebook: 'https://www.facebook.com/share/17ZbBnvT87/',
-    // Pendiente: pegar aquí el enlace de TikTok (vacío = no se muestra).
-    tiktok: '',
+    // TikTok de María (vacío = no se muestra).
+    tiktok: 'https://www.tiktok.com/@maria.gonzalez.ins',
   },
   // Actualizar a mano cuando cambie la ficha de Google.
   rating: { value: '4.9', count: 263 },

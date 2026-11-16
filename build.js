@@ -388,7 +388,7 @@ function jsonLd(c) {
     openingHoursSpecification: site.hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
     areaServed: { '@type': 'City', name: 'Tampa' },
     knowsLanguage: ['es', 'en'],
-    sameAs: [site.social.instagram, site.social.facebook],
+    sameAs: [site.social.instagram, site.social.facebook, site.social.tiktok].filter(Boolean),
   };
   return `<script type="application/ld+json">${JSON.stringify(ld)}</script>`;
 }
@@ -579,7 +579,10 @@ function homePage(c) {
       <div class="ig-intro reveal">
         <h2 class="feature-heading">${h.instagram.heading}</h2>
         <p>${h.instagram.text}</p>
-        <a class="btn btn-solid" href="${ig.url}" ${ext}>${icon.instagram}<span>${h.instagram.follow}</span></a>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="${ig.url}" ${ext}>${icon.instagram}<span>${h.instagram.follow}</span></a>
+          ${site.social.tiktok ? `<a class="btn btn-outline" href="${site.social.tiktok}" ${ext}>${icon.tiktok}<span>${h.instagram.tiktok}</span></a>` : ''}
+        </div>
         <p class="ig-handle">@${ig.handle}</p>
       </div>
       <div class="reveal">${feed}</div>

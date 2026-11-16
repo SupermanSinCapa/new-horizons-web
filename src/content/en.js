@@ -7,6 +7,7 @@ module.exports = {
     auto: '/en/auto-insurance/',
     commercial: '/en/commercial-insurance/',
     property: '/en/home-insurance/',
+    recreational: '/en/recreational-insurance/',
     about: '/en/about/',
     terms: '/en/terms-and-conditions/',
   },
@@ -14,7 +15,7 @@ module.exports = {
   ui: {
     skip: 'Skip to content',
     home: 'Home',
-    nav: { auto: 'Auto', commercial: 'Commercial', property: 'Home Insurance', about: 'About us', reviews: 'Reviews', contact: 'Contact' },
+    nav: { auto: 'Auto', commercial: 'Commercial', property: 'Home Insurance', recreational: 'Recreational', about:'About us', reviews: 'Reviews', contact: 'Contact' },
     navLabel: 'Main',
     menuOpen: 'Open menu',
     menuClose: 'Close menu',
@@ -34,7 +35,7 @@ module.exports = {
     mapTitle: 'Map of the New Horizons Insurance office in Tampa',
     booking: 'Book an appointment online',
     photoSoon: 'Photo coming soon',
-    rotator: { before: '', words: ['Auto', 'Truck', 'Business', 'Home'], after: 'insurance in Tampa, Florida.' },
+    rotator: { before: '', words: ['Auto', 'Truck', 'Business', 'Home', 'Boat'], after: 'insurance in Tampa, Florida.' },
     quick: { title: 'Get a quote in minutes', text: 'Choose what you want to insure and we’ll reply on WhatsApp.' },
     recommended: 'Most complete',
     profileSoon: 'Profile coming soon',
@@ -45,7 +46,7 @@ module.exports = {
       phone: 'Phone',
       email: 'Email (optional)',
       type: 'Type of insurance',
-      typeOptions: ['Auto insurance', 'Commercial / business', 'Trucking & transport', 'Home insurance', 'Renters insurance', 'Flood insurance', 'Other'],
+      typeOptions: ['Auto insurance', 'Commercial / business', 'Trucking & transport', 'Home insurance', 'Renters insurance', 'Flood insurance', 'Recreational (RV, motorhome, boat, motorcycle)', 'Other'],
       pref: 'How should we contact you?',
       prefOptions: ['Phone call', 'WhatsApp', 'Email'],
       message: 'Message (optional)',
@@ -79,7 +80,7 @@ module.exports = {
   home: {
     meta: {
       title: 'New Horizons Insurance | Auto, Commercial & Home Insurance in Tampa',
-      description: 'Independent insurance agency in Tampa, FL, with more than 10 years of experience. Auto, commercial, trucking and home insurance. Service in English and Spanish.',
+      description: 'Independent insurance agency in Tampa, FL, with more than 10 years of experience. Auto, commercial, trucking, home and recreational insurance. Service in English and Spanish.',
     },
     hero: {
       label: 'Independent insurance agency — Tampa, Florida',
@@ -110,6 +111,12 @@ module.exports = {
           title: 'Home & Renters',
           text: 'Protect your home, your belongings and your peace of mind against theft, accidents and hurricane season.',
           points: ['Homeowners', 'Flood', 'Renters', 'Mobile homes'],
+        },
+        recreational: {
+          kicker: 'Travel & adventure',
+          title: 'Recreational',
+          text: 'For what you use to live, travel and have fun: on the road, at the campground or on the water.',
+          points: ['Mobile homes', 'Motorhomes & RVs', 'Motorcycles & off-road', 'Boats & jet skis'],
         },
       },
     },
@@ -342,6 +349,40 @@ module.exports = {
     },
   },
 
+  recreational: {
+    meta: {
+      title: 'Recreational Insurance in Tampa, FL: RV, Motorhome, Boat & Motorcycle | New Horizons Insurance',
+      description: 'Insurance for mobile homes, motorhomes, motorcycles, ATVs, RVs, travel trailers and boats in Tampa, FL. Free, personalized quotes in English and Spanish.',
+    },
+    hero: {
+      label: 'Recreational — Tampa, Florida',
+      title: 'Recreational Insurance',
+      highlight: 'Recreational',
+      lines: [['Coverages', '#coverages']],
+      sub: 'Your mobile home, your motorhome, your motorcycle or your boat. We protect what you use to live, travel and have fun — on the road, at the campground or on the water.',
+      meta: [['For', 'Mobile homes · RVs · Boats'], ['Includes', 'Motorcycles · ATVs · Travel trailers'], ['Quote', 'Free & personalized']],
+      wa: 'Hi, I would like a recreational insurance quote.',
+    },
+    groups: [
+      {
+        id: 'coverages',
+        label: 'Coverages',
+        heading: 'Protect what you use to live, travel and have fun.',
+        wa: 'Hi, I would like a recreational insurance quote.',
+        items: [
+          { title: 'Manufactured & Mobile Homes', tag: 'Primary, seasonal or rental', text: 'Your mobile home deserves the same protection as any other home. We help you find a policy that covers the structure, your belongings and your liability, whether it is your primary residence, a seasonal home or a rental.' },
+          { title: 'Motorhomes', tag: 'On the road and parked', text: 'Travel with peace of mind knowing your motorhome is protected on the road and when parked. We cover the vehicle, your belongings on board and your liability, whether you use it for weekend getaways or live in it full time.' },
+          { title: 'Motorcycles & Off-Road Vehicles', tag: 'Motorcycles · ATVs · UTVs', text: 'For those who love the freedom of two wheels or going off the pavement. We insure motorcycles, ATVs, UTVs and other off-road vehicles, with options to protect your gear, accessories and liability.' },
+          { title: 'Recreational Vehicles (RV)', tag: 'Campers · Fifth wheels · Park models', text: 'Campers, fifth wheels, park models and more. We offer coverage options designed for life on the road, so your adventures don’t turn into an unexpected expense.' },
+          { title: 'Travel Trailers', tag: 'Towable campers', text: 'Protect your travel trailer on the road, at the campground or stored at home. Coverage for damage, theft, personal belongings and more.' },
+          { title: 'Boats & Watercraft', tag: 'Boats · Pontoons · Jet skis · Sailboats', text: 'From fishing boats and pontoons to jet skis and sailboats. We insure your boat, its motor, the trailer and your liability on the water, so all you have to worry about is enjoying it.' },
+        ],
+        noteLabel: 'Note',
+        note: 'Coverage may vary by insurance company. Contact us for a free, personalized quote.',
+      },
+    ],
+  },
+
   // About page. DRAFT: confirm copy, roles and bios with the team.
   about: {
     meta: {
@@ -551,7 +592,7 @@ module.exports = {
       { id: 'fr44', q: 'What is an FR-44?', k: ['fr44', 'fr 44', 'dui', 'dwi', 'alcohol', 'drugs', 'drunk'], a: 'An FR-44 is similar to an SR-22 but with much higher limits: <strong>$100,000 per person / $300,000 per accident bodily injury + $50,000 property damage</strong>. It is required after a DUI conviction and usually lasts 3 years. We help you with the entire filing.' },
       { id: 'highrisk', q: 'Can I get insured with tickets or accidents?', k: ['high risk', 'dui', 'tickets', 'ticket', 'accidents', 'driving record', 'record', 'denied', 'rejected', 'turned down', 'new driver', 'inexperienced'], a: 'Yes. We offer <strong>high-risk</strong> coverage for drivers with tickets, accidents, a suspended license, little experience or a DUI conviction. We help you find a policy even if other insurers turned you down.' },
       { id: 'classic', q: 'Do you insure classic cars?', k: ['classic', 'antique', 'vintage', 'high value', 'agreed value', 'collector'], a: 'Yes. We offer <strong>agreed value</strong> policies: you and the insurer set your car’s value up front, and if there is a loss you receive that amount — not the depreciated market value.' },
-      { id: 'recreational', q: 'Do you insure boats, motorcycles or RVs?', k: ['boat', 'jet ski', 'jetski', 'motorcycle', 'bike', 'rv', 'motorhome', 'travel trailer', 'camper', 'watercraft', 'recreational'], a: 'Yes. We insure your <strong>motorhome (RV), travel trailer, motorcycle, boat or jet ski</strong> so you can enjoy weekends and vacations with total peace of mind.' },
+      { id: 'recreational', q: 'Do you insure boats, motorcycles or RVs?', k: ['boat', 'jet ski', 'jetski', 'motorcycle', 'bike', 'rv', 'motorhome', 'motor home', 'mobile home', 'manufactured home', 'travel trailer', 'camper', 'atv', 'utv', 'off-road', 'pontoon', 'sailboat', 'watercraft', 'recreational'], a: 'Yes. Under <strong>Recreational</strong> we insure manufactured and mobile homes, motorhomes, motorcycles and off-road vehicles (ATVs, UTVs), RVs, travel trailers and watercraft such as boats, pontoons, jet skis and sailboats. Coverage may vary by insurance company. <a href="{recreational}">See recreational insurance</a>.' },
       { id: 'seniors', q: 'Do you have programs for senior drivers?', k: ['senior', 'seniors', 'elderly', 'retired', 'older driver', 'low mileage', 'fewer miles'], a: 'Yes. We have programs designed for senior drivers, with adjusted rates and benefits for those who drive fewer miles per year.' },
       { id: 'commercial', q: 'What insurance do you have for businesses?', k: ['business', 'company', 'commercial', 'general liability', 'contractor', 'store', 'restaurant', 'small business', 'lawsuit'], a: 'For businesses we offer <strong>General Liability</strong>, <strong>Workers’ Compensation</strong>, <strong>Commercial Auto</strong> and <strong>Commercial Umbrella</strong>, plus trucking and transport coverage. <a href="{commercial}">See commercial insurance</a>.' },
       { id: 'workers', q: 'Is workers’ comp required?', k: ['workers comp', 'workers compensation', 'work comp', 'employees', 'workers', 'work injury', 'construction'], a: '<strong>Workers’ Compensation</strong> pays medical costs and part of the wages of employees injured or made ill by their work. In Florida it is required for <strong>construction businesses with 1 or more employees</strong> and for all other businesses with <strong>4 or more employees</strong>.' },

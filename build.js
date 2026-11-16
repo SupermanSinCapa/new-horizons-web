@@ -68,6 +68,10 @@ const icon = {
   alert: svg('<path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"/><path d="M12 9v4M12 17h.01"/>'),
   gem: svg('<path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6M2 9h20"/>'),
   sailboat: svg('<path d="M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4z"/><path d="M21 14 10 2 3 14z"/><path d="M10 2v16"/>'),
+  bus: svg('<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/>'),
+  tent: svg('<path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/>'),
+  motorbike: svg('<circle cx="5" cy="16" r="3"/><circle cx="19" cy="16" r="3"/><path d="M7.5 14h5l4-4H6m1.5 4 4-4"/><path d="M13 6h2l1.5 3 2 4"/>'),
+  mobileHome: svg('<path d="M2 20h20"/><path d="M4 20v-9l8-6 8 6v9"/><path d="M7 13h4v3H7z"/><path d="M14 20v-6h3v6"/>'),
   users: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>'),
   building: svg('<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/>'),
   hardhat: svg('<path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/>'),
@@ -90,9 +94,15 @@ const icon = {
 
 // Ícono de cada cobertura según su nombre (en español o inglés). El orden importa.
 const ICON_RULES = [
+  // Recreativos van primero: sus etiquetas mencionan "alquiler" y otras palabras de reglas de abajo.
+  [/embarcaci|watercraft/i, 'sailboat'],
+  [/motocicleta|motorcycle/i, 'motorbike'],
+  [/motor ?home/i, 'bus'],
+  [/travel trailer/i, 'tent'],
+  [/\(rv\)/i, 'caravan'],
+  [/manufactur|prefabricad|móviles|mobile home/i, 'mobileHome'],
   [/alto riesgo|high-risk|high risk/i, 'alert'],
   [/clásic|classic/i, 'gem'],
-  [/recreativ|recreational/i, 'sailboat'],
   [/mayores|senior/i, 'users'],
   [/exenci|exemption/i, 'fileCheck'],
   [/workers|compensaci/i, 'hardhat'],
@@ -106,12 +116,11 @@ const ICON_RULES = [
   [/general liability|civil general/i, 'building'],
   [/inundaci|flood/i, 'waves'],
   [/alquiler|renters/i, 'key'],
-  [/móviles|mobile/i, 'caravan'],
   [/propietarios|homeowners/i, 'home'],
   [/estándar|standard/i, 'badge'],
 ];
 const iconFor = (text) => icon[(ICON_RULES.find(([re]) => re.test(text)) || [null, 'shieldCheck'])[1]];
-const COVERAGE_ICONS = { auto: 'car', commercial: 'truck', property: 'home' };
+const COVERAGE_ICONS = { auto: 'car', commercial: 'truck', property: 'home', recreational: 'caravan' };
 const CHANNEL_ICONS = { call: 'phone', whatsapp: 'whatsapp', email: 'mail' };
 const WHY_ICONS = ['shieldCheck', 'languages', 'car', 'pin'];
 
@@ -256,6 +265,7 @@ function header(c, key) {
         ${link(r.auto, c.ui.nav.auto, 'auto')}
         ${link(r.commercial, c.ui.nav.commercial, 'commercial')}
         ${link(r.property, c.ui.nav.property, 'property')}
+        ${link(r.recreational, c.ui.nav.recreational, 'recreational')}
         ${link(r.about, c.ui.nav.about, 'about')}
         ${link(`${r.home}#${ids.reviews}`, c.ui.nav.reviews)}
         ${link(`${r.home}#${ids.contact}`, c.ui.nav.contact)}
@@ -292,6 +302,7 @@ function footer(c, key) {
           <li><a href="${c.routes.auto}">${c.home.coverages.items.auto.title}</a></li>
           <li><a href="${c.routes.commercial}">${c.home.coverages.items.commercial.title}</a></li>
           <li><a href="${c.routes.property}">${c.home.coverages.items.property.title}</a></li>
+          <li><a href="${c.routes.recreational}">${c.home.coverages.items.recreational.title}</a></li>
           <li><a href="${c.routes.about}">${c.ui.nav.about}</a></li>
         </ul>
       </nav>
@@ -752,6 +763,7 @@ function groupsPage(c, key) {
     ${head(++n, g.label)}
     <h2 class="section-heading reveal">${g.heading}</h2>
     ${list(g.items)}
+    ${g.note ? `<p class="note reveal"><span>${g.noteLabel}</span>${g.note}</p>` : ''}
     <div class="group-cta reveal">
       <a class="btn btn-solid" href="${wa(g.wa)}" ${ext}>${icon.whatsapp}<span>${c.ui.whatsapp}</span></a>
     </div>
@@ -911,6 +923,7 @@ function faqJson(c) {
     .replace(/\{auto\}/g, c.routes.auto)
     .replace(/\{commercial\}/g, c.routes.commercial)
     .replace(/\{property\}/g, c.routes.property)
+    .replace(/\{recreational\}/g, c.routes.recreational)
     .replace(/\{about\}/g, c.routes.about)
     .replace(/\{calendly\}/g, site.calendly)
     .replace(/\{waPhone\}/g, site.whatsappDisplay)
@@ -938,7 +951,7 @@ function favicon() {
 }
 
 function sitemap() {
-  const keys = ['home', 'auto', 'commercial', 'property', 'about', 'terms'];
+  const keys = ['home', 'auto', 'commercial', 'property', 'recreational', 'about', 'terms'];
   const urls = [];
   for (const lang of Object.keys(LANGS)) {
     for (const k of keys) {
@@ -975,6 +988,7 @@ for (const c of Object.values(LANGS)) {
     auto: autoPage(c),
     commercial: groupsPage(c, 'commercial'),
     property: groupsPage(c, 'property'),
+    recreational: groupsPage(c, 'recreational'),
     about: aboutPage(c),
     terms: termsPage(c),
   };

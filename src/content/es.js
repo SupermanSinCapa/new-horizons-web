@@ -8,6 +8,7 @@ module.exports = {
     auto: '/seguro-de-auto/',
     commercial: '/seguro-comercial/',
     property: '/seguro-de-hogar/',
+    recreational: '/seguros-recreativos/',
     about: '/nosotros/',
     terms: '/terminos-y-condiciones/',
   },
@@ -15,7 +16,7 @@ module.exports = {
   ui: {
     skip: 'Saltar al contenido',
     home: 'Inicio',
-    nav: { auto: 'Auto', commercial: 'Comercial', property: 'Hogar', about: 'Nosotros', reviews: 'Reseñas', contact: 'Contacto' },
+    nav: { auto: 'Auto', commercial: 'Comercial', property: 'Hogar', recreational: 'Recreativos', about:'Nosotros', reviews: 'Reseñas', contact: 'Contacto' },
     navLabel: 'Principal',
     menuOpen: 'Abrir menú',
     menuClose: 'Cerrar menú',
@@ -35,7 +36,7 @@ module.exports = {
     mapTitle: 'Mapa de la oficina de New Horizons Insurance en Tampa',
     booking: 'Agendar una cita en línea',
     photoSoon: 'Foto próximamente',
-    rotator: { before: 'Seguros de', words: ['auto', 'camiones', 'negocios', 'hogar'], after: 'en Tampa, Florida.' },
+    rotator: { before: 'Seguros de', words: ['auto', 'camiones', 'negocios', 'hogar', 'botes'], after: 'en Tampa, Florida.' },
     quick: { title: 'Cotiza en minutos', text: 'Elige qué quieres asegurar y te respondemos por WhatsApp.' },
     recommended: 'Más completo',
     profileSoon: 'Perfil próximamente',
@@ -46,7 +47,7 @@ module.exports = {
       phone: 'Teléfono',
       email: 'Correo electrónico (opcional)',
       type: 'Tipo de seguro',
-      typeOptions: ['Seguro de auto', 'Seguro comercial / negocio', 'Camiones y transporte', 'Seguro de hogar', 'Seguro de inquilino (renters)', 'Seguro de inundación', 'Otro'],
+      typeOptions: ['Seguro de auto', 'Seguro comercial / negocio', 'Camiones y transporte', 'Seguro de hogar', 'Seguro de inquilino (renters)', 'Seguro de inundación', 'Recreativos (RV, motor home, bote, moto)', 'Otro'],
       pref: '¿Cómo prefieres que te contactemos?',
       prefOptions: ['Llamada', 'WhatsApp', 'Correo'],
       message: 'Mensaje (opcional)',
@@ -82,7 +83,7 @@ module.exports = {
   home: {
     meta: {
       title: 'New Horizons Insurance | Seguros de auto, comerciales y de hogar en Tampa',
-      description: 'Agencia independiente de seguros en Tampa, FL, con más de 10 años de experiencia. Seguros de auto, comerciales, camiones y hogar. Atención en español e inglés.',
+      description: 'Agencia independiente de seguros en Tampa, FL, con más de 10 años de experiencia. Seguros de auto, comerciales, camiones, hogar y recreativos. Atención en español e inglés.',
     },
     hero: {
       label: 'Agencia independiente de seguros — Tampa, Florida',
@@ -113,6 +114,12 @@ module.exports = {
           title: 'Hogar y Alquiler',
           text: 'Protege tu casa, tus pertenencias y tu tranquilidad ante robos, accidentes y la temporada de huracanes.',
           points: ['Propietarios', 'Inundaciones', 'Inquilinos', 'Casas móviles'],
+        },
+        recreational: {
+          kicker: 'Viajes y aventura',
+          title: 'Recreativos',
+          text: 'Para lo que usas para vivir, viajar y disfrutar: en la carretera, en el campamento o en el agua.',
+          points: ['Casas móviles', 'Motor homes y RV', 'Motos y todoterreno', 'Botes y jet skis'],
         },
       },
     },
@@ -346,6 +353,40 @@ module.exports = {
     },
   },
 
+  recreational: {
+    meta: {
+      title: 'Seguros Recreativos en Tampa, FL: RV, Motor Home, Botes y Motos | New Horizons Insurance',
+      description: 'Seguros para casas móviles, motor homes, motocicletas, ATVs, RVs, travel trailers y embarcaciones en Tampa, FL. Cotización gratis y personalizada en español e inglés.',
+    },
+    hero: {
+      label: 'Recreativos — Tampa, Florida',
+      title: 'Seguros Recreativos',
+      highlight: 'Recreativos',
+      lines: [['Coberturas', '#coberturas']],
+      sub: 'Tu casa móvil, tu motor home, tu moto o tu bote. Protegemos lo que usas para vivir, viajar y disfrutar, en la carretera, en el campamento o en el agua.',
+      meta: [['Para', 'Casas móviles · RV · Botes'], ['Incluye', 'Motos · ATV · Travel trailers'], ['Cotización', 'Gratis y personalizada']],
+      wa: 'Hola, quiero cotizar un seguro recreativo.',
+    },
+    groups: [
+      {
+        id: 'coberturas',
+        label: 'Coberturas',
+        heading: 'Protege lo que usas para vivir, viajar y disfrutar.',
+        wa: 'Hola, quiero cotizar un seguro recreativo.',
+        items: [
+          { title: 'Casas Manufacturadas / Móviles', tag: 'Residencia, temporada o alquiler', text: 'Tu casa móvil merece la misma protección que cualquier hogar. Te ayudamos a encontrar una póliza que cubra la estructura, tus pertenencias y tu responsabilidad, ya sea tu residencia principal, de temporada o de alquiler.' },
+          { title: 'Motor Home', tag: 'En la carretera y estacionado', text: 'Viaja tranquilo sabiendo que tu motor home está protegido en la carretera y estacionado. Cubrimos el vehículo, tus pertenencias a bordo y tu responsabilidad, tanto si lo usas para escapadas de fin de semana como si vives en él a tiempo completo.' },
+          { title: 'Motocicletas y Vehículos Todoterreno', tag: 'Motos · ATV · UTV', text: 'Para los que disfrutan la libertad sobre dos ruedas o fuera del asfalto. Aseguramos motocicletas, ATVs, UTVs y otros vehículos todoterreno, con opciones para proteger tu equipo, accesorios y tu responsabilidad.' },
+          { title: 'Vehículos Recreativos (RV)', tag: 'Campers · Fifth wheels · Park models', text: 'Campers, fifth wheels, park models y más. Te ofrecemos opciones de cobertura pensadas para la vida en ruta, para que tus aventuras no se conviertan en un gasto inesperado.' },
+          { title: 'Travel Trailer', tag: 'Remolques de viaje', text: 'Protege tu remolque de viaje mientras lo llevas en carretera, en el campamento o guardado en casa. Coberturas para daños, robo, pertenencias personales y más.' },
+          { title: 'Embarcaciones (Watercraft)', tag: 'Botes · Pontones · Jet skis · Veleros', text: 'Desde botes de pesca y pontones hasta jet skis y veleros. Aseguramos tu embarcación, su motor, el remolque y tu responsabilidad en el agua, para que solo te preocupes por disfrutar.' },
+        ],
+        noteLabel: 'Nota',
+        note: 'Las coberturas pueden variar según la aseguradora. Contáctanos para una cotización gratis y personalizada.',
+      },
+    ],
+  },
+
   // Página "Nosotros". BORRADOR: confirmar textos, roles y biografías con el equipo.
   about: {
     meta: {
@@ -566,7 +607,7 @@ module.exports = {
       { id: 'fr44', q: '¿Qué es un FR-44?', k: ['fr44', 'fr 44', 'dui', 'alcohol', 'drogas', 'borracho', 'tomado'], a: 'El FR-44 es un certificado similar al SR-22, pero con límites mucho más altos: <strong>$100,000 por persona / $300,000 por accidente en lesiones + $50,000 en daños a la propiedad</strong>. Se pide después de una condena por DUI y suele durar 3 años. Te ayudamos con todo el trámite.' },
       { id: 'altoriesgo', q: '¿Me aseguran si tengo multas o accidentes?', k: ['alto riesgo', 'high risk', 'dui', 'multas', 'multa', 'accidentes', 'tickets', 'record', 'historial', 'me negaron', 'rechazaron', 'poca experiencia', 'nuevo conductor'], a: 'Sí. Tenemos cobertura de <strong>alto riesgo</strong> para conductores con multas, accidentes, licencia suspendida, poca experiencia o una condena por DUI. Te ayudamos a encontrar una póliza aunque otras aseguradoras te la hayan negado.' },
       { id: 'clasicos', q: '¿Aseguran autos clásicos?', k: ['clasico', 'antiguo', 'alto valor', 'valor acordado', 'coleccion'], a: 'Sí. Ofrecemos pólizas de <strong>valor acordado</strong>: tú y la aseguradora fijan desde el inicio cuánto vale tu carro, y si hay una pérdida recibes ese valor y no el valor depreciado del mercado.' },
-      { id: 'recreativos', q: '¿Aseguran botes, motos o RV?', k: ['bote', 'lancha', 'jet ski', 'moto de agua', 'motocicleta', 'moto', 'rv', 'motorhome', 'casa rodante', 'embarcacion', 'recreativo'], a: 'Sí. Aseguramos tu <strong>motorhome (RV), casa rodante, motocicleta, bote o moto de agua (Jet Ski)</strong> para que disfrutes tus fines de semana y vacaciones con total tranquilidad.' },
+      { id: 'recreativos', q: '¿Aseguran botes, motos o RV?', k: ['bote', 'lancha', 'jet ski', 'moto de agua', 'motocicleta', 'moto', 'rv', 'motorhome', 'motor home', 'casa rodante', 'casa movil', 'casa manufacturada', 'traila', 'travel trailer', 'camper', 'atv', 'utv', 'cuatrimoto', 'todoterreno', 'ponton', 'velero', 'embarcacion', 'recreativo', 'recreativos'], a: 'Sí. En <strong>Recreativos</strong> aseguramos casas manufacturadas y móviles, motor homes, motocicletas y vehículos todoterreno (ATV, UTV), RVs, travel trailers y embarcaciones como botes, pontones, jet skis y veleros. Las coberturas pueden variar según la aseguradora. <a href="{recreational}">Ver seguros recreativos</a>.' },
       { id: 'mayores', q: '¿Tienen programas para conductores mayores?', k: ['mayores', 'tercera edad', 'senior', 'jubilado', 'retirado', 'pocas millas', 'adulto mayor'], a: 'Sí. Tenemos programas pensados para conductores de la tercera edad, con tarifas ajustadas y beneficios para quienes manejan menos millas al año.' },
       { id: 'comercial', q: '¿Qué seguros tienen para negocios?', k: ['negocio', 'empresa', 'comercial', 'general liability', 'responsabilidad civil general', 'contratista', 'tienda', 'restaurante', 'local comercial', 'demanda'], a: 'Para negocios ofrecemos <strong>Responsabilidad Civil General</strong>, <strong>Workers’ Compensation</strong>, <strong>Auto Comercial</strong> y <strong>Póliza Paraguas Comercial</strong>, además de seguros para camiones y transporte. <a href="{commercial}">Ver seguro comercial</a>.' },
       { id: 'workers', q: '¿Es obligatorio el Workers’ Comp?', k: ['workers comp', 'workers compensation', 'compensacion', 'compensacion al trabajador', 'empleados', 'trabajadores', 'lesion laboral', 'construccion'], a: 'El <strong>Workers’ Compensation</strong> paga los gastos médicos y parte del salario de tus empleados si se lesionan o enferman por su trabajo. En Florida es obligatorio para empresas de <strong>construcción con 1 o más empleados</strong> y para el resto de empresas con <strong>4 o más empleados</strong>.' },

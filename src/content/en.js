@@ -123,7 +123,7 @@ module.exports = {
         { title: 'For every kind of driver', tag: 'High-risk · Any driving record', text: 'We help you find a policy even if other insurers turned you down, whatever your driving record.' },
         { title: 'Your local agent', tag: 'Palm River Rd · Tampa', text: 'We don’t just sell coverage, we build relationships. Visit our office or handle everything by phone or WhatsApp.' },
       ],
-      quote: { text: 'We protect your future and your business.', by: 'María González', role: 'Insurance agent' },
+      quote: { text: 'We protect your future and your business.', by: 'María González', role: 'Founder & President' },
     },
     sr22: {
       label: 'SR-22 & FR-44',
@@ -346,7 +346,7 @@ module.exports = {
   about: {
     meta: {
       title: 'About Us | New Horizons Insurance, Tampa Insurance Agency',
-      description: 'Meet New Horizons Insurance: an independent, bilingual agency in Tampa, FL. María González and her team compare 30+ insurance companies to protect your family and business.',
+      description: 'Meet New Horizons Insurance: an independent, bilingual agency in Tampa, FL. Founded in 2015 by María González, the agency compares 30+ insurance companies to protect your family and business.',
     },
     hero: {
       label: 'About us — Tampa, Florida',
@@ -370,10 +370,12 @@ module.exports = {
     maria: {
       id: 'maria',
       label: 'Meet María',
-      role: 'Insurance agent',
+      role: 'Founder & President',
       bio: [
-        'María González is an insurance agent at New Horizons Insurance and the person many of our Tampa clients know by name.',
-        'Her approach is simple: understand what you need, compare top insurance companies and explain every coverage in plain words before you sign. Her clients highlight her kindness, her knowledge and that she always finds the best price without cutting protection.',
+        'I was born in Peru and came to the United States shortly before turning 18 to reunite with my mother, whose hard work and sacrifice taught me that dreams are built with discipline and determination. I studied at Montclair State College in New Jersey and later settled in Florida.',
+        'I began my career as a teller at Bank of America and worked my way up to branch manager. Later, at Wachovia Bank, I went on to oversee two branches in Tampa and Brandon, as one of the few Latina managers in the area. During the 2008 crisis I learned the most important lesson of my career: behind every client there is a story that deserves to be heard.',
+        'In 2015 I founded New Horizons Insurance Inc., an independent agency built on personalized service and relationships of trust. Today I lead a team of four professionals, including my son Aaron, and I hold a 2-20 Property & Casualty insurance license and a real estate license.',
+        'To me, true success lies in the lives we touch, the opportunities we create and the legacy we leave behind. That is the spirit in which I serve every family and business that places its trust in us.',
       ],
       quote: 'We protect your future and your business.',
       cta: 'Talk to María',
@@ -564,7 +566,7 @@ module.exports = {
       { id: 'umbrella', q: 'What is an umbrella policy?', k: ['umbrella', 'extra liability', 'limits', 'lawsuits', 'extra protection'], a: 'A <strong>Personal Umbrella</strong> policy covers the “gaps” and costly lawsuits that go beyond the limits of your auto or home policies. There is also a commercial version for businesses.' },
       { id: 'mobile', q: 'Do you insure mobile homes?', k: ['mobile home', 'mobile homes', 'manufactured', 'trailer home', 'prefab'], a: 'Yes. Mobile and manufactured homes need different protection, and we offer affordable, specialized options to insure them in Tampa.' },
       { id: 'hurricane', q: 'What is a hurricane deductible?', k: ['hurricane', 'deductible', 'storm', 'wind', 'windstorm'], a: 'Many Florida home policies have a <strong>separate hurricane deductible</strong>. We explain yours before you sign so there are no surprises.' },
-      { id: 'team', q: 'Who are you?', k: ['who are you', 'who is maria', 'maria', 'team', 'about', 'michel', 'nory', 'norelvys', 'aaron', 'owner'], a: 'We are <strong>New Horizons Insurance Inc.</strong>, an independent, bilingual agency in Tampa with more than 10 years of experience. You’ll work with <strong>María González</strong> and her team: <strong>Nory</strong> (homeowners insurance), <strong>Michel</strong> (commercial insurance) and <strong>Aaron</strong> (auto insurance). <a href="{about}">Meet the team</a>.' },
+      { id: 'team', q: 'Who are you?', k: ['who are you', 'who is maria', 'maria', 'team', 'about', 'michel', 'nory', 'norelvys', 'aaron', 'owner', 'founder', 'president'], a: 'We are <strong>New Horizons Insurance Inc.</strong>, an independent, bilingual agency in Tampa with more than 10 years of experience. You’ll work with <strong>María González</strong>, who founded the agency in 2015 and serves as its president, and her team: <strong>Nory</strong> (homeowners insurance), <strong>Michel</strong> (commercial insurance) and <strong>Aaron</strong> (auto insurance). <a href="{about}">Meet the team</a>.' },
       { id: 'appointment', q: 'Can I book an appointment?', k: ['appointment', 'book', 'schedule', 'meeting', 'calendly', 'visit'], a: 'Yes. You can <a href="{calendly}" target="_blank" rel="noopener">book an appointment online</a>, call us at <a href="tel:{tel}">{phone}</a> or visit our office during business hours.' },
       { id: 'claim', q: 'What do I do after an accident or to file a claim?', k: ['claim', 'file a claim', 'had an accident', 'accident', 'crash', 'hit me', 'report'], a: 'If you had an accident or need to file a claim, call us at <a href="tel:{tel}">{phone}</a> or message us on WhatsApp and we’ll guide you step by step with your insurance company.' },
     ],

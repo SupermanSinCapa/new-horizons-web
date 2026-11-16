@@ -126,7 +126,7 @@ module.exports = {
         { title: 'Para todo tipo de conductor', tag: 'Alto riesgo · Cualquier historial', text: 'Te ayudamos a encontrar una póliza aunque otras aseguradoras te la hayan negado, sin importar tu historial de manejo.' },
         { title: 'Tu agente local', tag: 'Palm River Rd · Tampa', text: 'No solo vendemos coberturas, construimos relaciones. Visítanos en nuestra oficina o resuélvelo todo por teléfono o WhatsApp.' },
       ],
-      quote: { text: 'Protegemos tu futuro y el de tu negocio.', by: 'María González', role: 'Agente de seguros' },
+      quote: { text: 'Protegemos tu futuro y el de tu negocio.', by: 'María González', role: 'Fundadora y Presidenta' },
     },
     sr22: {
       label: 'SR-22 y FR-44',
@@ -350,7 +350,7 @@ module.exports = {
   about: {
     meta: {
       title: 'Quiénes somos | New Horizons Insurance, agencia de seguros en Tampa',
-      description: 'Conoce a New Horizons Insurance: agencia independiente y bilingüe en Tampa, FL. María González y su equipo comparan más de 30 aseguradoras para proteger a tu familia y tu negocio.',
+      description: 'Conoce a New Horizons Insurance: agencia independiente y bilingüe en Tampa, FL. Fundada en 2015 por María González, la agencia compara más de 30 aseguradoras para proteger a tu familia y tu negocio.',
     },
     hero: {
       label: 'Quiénes somos — Tampa, Florida',
@@ -374,10 +374,12 @@ module.exports = {
     maria: {
       id: 'maria',
       label: 'Quién es María',
-      role: 'Agente de seguros',
+      role: 'Fundadora y Presidenta',
       bio: [
-        'María González es agente de seguros en New Horizons Insurance y la persona que muchos de nuestros clientes en Tampa conocen por su nombre.',
-        'Su forma de trabajar es sencilla: entender lo que necesitas, comparar entre las mejores aseguradoras y explicarte cada cobertura con palabras claras antes de firmar. Sus clientes destacan su amabilidad, su conocimiento y que siempre busca el mejor precio sin sacrificar la protección.',
+        'Nací en Perú y llegué a Estados Unidos poco antes de cumplir 18 años para reunirme con mi madre, cuyo esfuerzo y sacrificio me enseñaron que los sueños se construyen con disciplina y determinación. Estudié en Montclair State College, en Nueva Jersey, y luego me establecí en Florida.',
+        'Comencé mi carrera como cajera en Bank of America y fui ascendiendo hasta convertirme en gerente de sucursal. Más tarde, en Wachovia Bank, llegué a supervisar dos sucursales en Tampa y Brandon, siendo una de las pocas gerentes latinas de la zona. Durante la crisis de 2008 aprendí la lección más importante de mi carrera: detrás de cada cliente hay una historia que merece ser escuchada.',
+        'En 2015 fundé New Horizons Insurance Inc., una agencia independiente basada en la atención personalizada y las relaciones de confianza. Hoy lidero un equipo de cuatro profesionales, entre ellos mi hijo Aarón, y cuento con licencia de seguros Property & Casualty 2-20 y licencia de bienes raíces.',
+        'Para mí, el verdadero éxito está en las vidas que tocamos, las oportunidades que creamos y el legado que dejamos. Ese es el espíritu con el que sirvo a cada familia y empresa que confía en nosotros.',
       ],
       quote: 'Protegemos tu futuro y el de tu negocio.',
       cta: 'Hablar con María',
@@ -579,7 +581,7 @@ module.exports = {
       { id: 'umbrella', q: '¿Qué es una póliza paraguas?', k: ['paraguas', 'umbrella', 'limites', 'demandas costosas', 'proteccion extra'], a: 'La <strong>Póliza Paraguas (Umbrella)</strong> cubre esos “huecos” y las demandas costosas que superan los límites de tus pólizas de auto o de hogar. También existe una versión comercial para negocios.' },
       { id: 'moviles', q: '¿Aseguran casas móviles?', k: ['casa movil', 'casas moviles', 'mobile home', 'prefabricada', 'manufactured', 'traila'], a: 'Sí. Las casas móviles y prefabricadas necesitan una protección diferente, y ofrecemos opciones accesibles y especializadas para asegurarlas en Tampa.' },
       { id: 'huracan', q: '¿Qué es el deducible de huracán?', k: ['huracan', 'deducible', 'hurricane', 'tormenta', 'viento'], a: 'Muchas pólizas de hogar en Florida tienen un <strong>deducible separado para huracanes</strong>. Te explicamos el tuyo antes de firmar para que no tengas sorpresas.' },
-      { id: 'equipo', q: '¿Quiénes son ustedes?', k: ['quienes son', 'quien es maria', 'maria', 'equipo', 'nosotros', 'michel', 'nory', 'norelvys', 'aaron', 'la duena'], a: 'Somos <strong>New Horizons Insurance Inc.</strong>, una agencia independiente y bilingüe en Tampa con más de 10 años de experiencia. Te atienden <strong>María González</strong> y su equipo: <strong>Nory</strong> (seguros de vivienda), <strong>Michel</strong> (seguros comerciales) y <strong>Aaron</strong> (seguros de auto). <a href="{about}">Conoce al equipo</a>.' },
+      { id: 'equipo', q: '¿Quiénes son ustedes?', k: ['quienes son', 'quien es maria', 'maria', 'equipo', 'nosotros', 'michel', 'nory', 'norelvys', 'aaron', 'la duena', 'fundadora', 'presidenta', 'dueña'], a: 'Somos <strong>New Horizons Insurance Inc.</strong>, una agencia independiente y bilingüe en Tampa con más de 10 años de experiencia. Te atienden <strong>María González</strong>, fundadora y presidenta de la agencia desde 2015, y su equipo: <strong>Nory</strong> (seguros de vivienda), <strong>Michel</strong> (seguros comerciales) y <strong>Aaron</strong> (seguros de auto). <a href="{about}">Conoce al equipo</a>.' },
       { id: 'cita', q: '¿Puedo agendar una cita?', k: ['cita', 'agendar', 'reservar', 'appointment', 'calendly', 'reunion', 'visita'], a: 'Sí. Puedes <a href="{calendly}" target="_blank" rel="noopener">agendar una cita en línea</a>, llamarnos al <a href="tel:{tel}">{phone}</a> o visitarnos en nuestra oficina en horario de atención.' },
       { id: 'reclamo', q: '¿Qué hago si tuve un accidente o necesito hacer un reclamo?', k: ['reclamo', 'claim', 'tuve un accidente', 'me chocaron', 'choque', 'siniestro', 'reportar'], a: 'Si tuviste un accidente o necesitas hacer un reclamo, llámanos al <a href="tel:{tel}">{phone}</a> o escríbenos por WhatsApp y te orientamos paso a paso con tu aseguradora.' },
     ],
